@@ -1,0 +1,176 @@
+/* src/styles/global.css */
+
+/* === Tailwind Core === */
+@import "tailwindcss";
+
+/* === Plugins === */
+@plugin "@tailwindcss/typography";
+
+/* === Dark Mode (class-based) === */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* === Theme: "Terminal Meets Editorial" === */
+@theme {
+  /* --- Colors: Dark Mode (default) --- */
+  --color-bg: #0a0a0f;
+  --color-surface: #12121a;
+  --color-text: #e2e8f0;
+  --color-muted: #64748b;
+  --color-accent: oklch(0.75 0.18 175);
+  --color-accent-hover: oklch(0.82 0.15 175);
+  --color-border: #1e293b;
+
+  /* --- Colors: Light Mode --- */
+  --color-bg-light: #ffffff;
+  --color-surface-light: #f8f9fa;
+  --color-text-light: #1e293b;
+  --color-border-light: #e2e8f0;
+
+  /* --- Category Colors --- */
+  --color-cat-article: oklch(0.75 0.15 250);
+  --color-cat-tool: oklch(0.75 0.15 150);
+  --color-cat-guide: oklch(0.75 0.15 50);
+  --color-cat-case-study: oklch(0.75 0.15 320);
+
+  /* --- Typography --- */
+  --font-heading: 'JetBrains Mono', ui-monospace, monospace;
+  --font-body: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* --- Layout --- */
+  --width-prose: 720px;
+  --width-wide: 1280px;
+
+  /* --- Transitions --- */
+  --transition-default: 150ms ease;
+}
+
+/* === Base Styles === */
+@layer base {
+  html {
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Dark mode (default) */
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  /* Light mode override */
+  html:not(.dark) body {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-light);
+  }
+
+  /* Headings use monospace */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  /* Selection highlight */
+  ::selection {
+    background-color: oklch(0.75 0.18 175 / 0.3);
+  }
+}
+
+/* === Typography Plugin Overrides (prose) === */
+@layer components {
+  /*
+   * These overrides customize the Tailwind Typography plugin
+   * for the "Terminal Meets Editorial" aesthetic.
+   * Applied when using `class="prose"` on rendered MDX content.
+   */
+  .prose {
+    --tw-prose-body: var(--color-text);
+    --tw-prose-headings: var(--color-text);
+    --tw-prose-links: var(--color-accent);
+    --tw-prose-bold: var(--color-text);
+    --tw-prose-code: var(--color-accent);
+    --tw-prose-quotes: var(--color-muted);
+    --tw-prose-quote-borders: var(--color-accent);
+    max-width: var(--width-prose);
+  }
+
+  /* Dark prose defaults (dark is the default theme) */
+  .prose :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-heading);
+  }
+
+  .prose :where(a) {
+    text-decoration-color: oklch(0.75 0.18 175 / 0.4);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition-default);
+  }
+
+  .prose :where(a):hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  .prose :where(code):not(:where(pre code)) {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    padding: 0.125em 0.375em;
+    border-radius: 0.25rem;
+    background-color: oklch(0.75 0.18 175 / 0.1);
+  }
+
+  .prose :where(pre) {
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+  }
+
+  /* Light mode prose overrides */
+  html:not(.dark) .prose {
+    --tw-prose-body: var(--color-text-light);
+    --tw-prose-headings: var(--color-text-light);
+    --tw-prose-bold: var(--color-text-light);
+    --tw-prose-quotes: #64748b;
+  }
+}
+
+/* === Code Block Enhancements (rehype-pretty-code) === */
+@layer components {
+  /* Dual-theme code blocks: show correct theme based on mode */
+  [data-rehype-pretty-code-figure] [data-theme="light"],
+  html.dark [data-rehype-pretty-code-figure] [data-theme="dark"] {
+    display: none;
+  }
+
+  html:not(.dark) [data-rehype-pretty-code-figure] [data-theme="light"],
+  html.dark [data-rehype-pretty-code-figure] [data-theme="dark"] {
+    display: block;
+  }
+
+  html:not(.dark) [data-rehype-pretty-code-figure] [data-theme="dark"] {
+    display: none;
+  }
+
+  /* Code block styling */
+  [data-rehype-pretty-code-figure] pre {
+    overflow-x: auto;
+    padding: 1rem 1.25rem;
+  }
+
+  [data-rehype-pretty-code-figure] code {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  /* Inline code from rehype-pretty-code */
+  [data-rehype-pretty-code-figure] > code {
+    padding: 0.125em 0.375em;
+    border-radius: 0.25rem;
+  }
+}
+
+/* === Utility: Subtle Background Grain Texture === */
+@layer utilities {
+  .bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+}
