@@ -13,7 +13,7 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 border-b border-border dark:border-border bg-bg/80 dark:bg-bg/80 backdrop-blur-md">
+<header class="sticky top-0 z-50 border-b border-border-light dark:border-border bg-bg-light/80 dark:bg-bg/80 backdrop-blur-md">
   <nav class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16" aria-label="Main navigation">
     <!-- Logo / Site Name -->
     <a href="/" class="flex items-center gap-2 font-heading text-lg font-bold text-accent hover:text-accent-hover transition-colors">
@@ -31,7 +31,7 @@ const currentPath = Astro.url.pathname;
               'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
               currentPath.startsWith(item.href)
                 ? 'text-accent bg-accent/10'
-                : 'text-muted hover:text-text dark:hover:text-text hover:bg-surface dark:hover:bg-surface',
+                : 'text-muted hover:text-text-light dark:hover:text-text hover:bg-surface-light dark:hover:bg-surface',
             ]}
           >
             {item.label}
@@ -48,7 +48,7 @@ const currentPath = Astro.url.pathname;
       <button
         id="mobile-menu-btn"
         type="button"
-        class="md:hidden p-2 rounded-lg text-muted hover:text-text hover:bg-surface dark:hover:text-text dark:hover:bg-surface transition-colors"
+        class="md:hidden p-2 rounded-lg text-muted hover:text-text-light dark:hover:text-text hover:bg-surface-light dark:hover:bg-surface transition-colors"
         aria-label="Open menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
@@ -66,7 +66,7 @@ const currentPath = Astro.url.pathname;
   </nav>
 
   <!-- Mobile Menu (hidden by default) -->
-  <div id="mobile-menu" class="md:hidden hidden border-t border-border dark:border-border bg-bg dark:bg-bg">
+  <div id="mobile-menu" class="md:hidden hidden border-t border-border-light dark:border-border bg-bg-light dark:bg-bg">
     <ul class="px-4 py-4 space-y-1">
       {navItems.map(item => (
         <li>
@@ -76,7 +76,7 @@ const currentPath = Astro.url.pathname;
               'block px-3 py-2 rounded-lg text-sm font-medium transition-colors',
               currentPath.startsWith(item.href)
                 ? 'text-accent bg-accent/10'
-                : 'text-muted hover:text-text dark:hover:text-text hover:bg-surface dark:hover:bg-surface',
+                : 'text-muted hover:text-text-light dark:hover:text-text hover:bg-surface-light dark:hover:bg-surface',
             ]}
           >
             {item.label}
