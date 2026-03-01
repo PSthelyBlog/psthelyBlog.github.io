@@ -1,0 +1,53 @@
+---
+// src/components/Comments.astro
+---
+
+<section class="mt-16 pt-8 border-t border-border-light dark:border-border">
+  <h2 class="font-heading text-2xl font-bold text-text-light dark:text-text mb-6">Comments</h2>
+  <script
+    is:inline
+    src="https://giscus.app/client.js"
+    data-repo="PSthelyBlog/psthelyBlog.github.io"
+    data-repo-id="R_kgDORbJNbg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDORbJNbs4C3Z8A"
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+  ></script>
+</section>
+
+<script is:inline>
+  (function() {
+    function updateGiscusTheme() {
+      var isDark = document.documentElement.classList.contains('dark');
+      var theme = isDark ? 'dark' : 'light';
+      var iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe) return;
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme } } },
+        'https://giscus.app'
+      );
+    }
+
+    // Watch for class changes on <html> (dark mode toggle)
+    var giscusObserver = new MutationObserver(updateGiscusTheme);
+    giscusObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    // Set initial theme after Giscus iframe loads
+    window.addEventListener('message', function(event) {
+      if (event.origin !== 'https://giscus.app') return;
+      updateGiscusTheme();
+    });
+  })();
+</script>

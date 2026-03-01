@@ -1,0 +1,54 @@
+---
+// src/components/Callout.astro
+interface Props {
+  type?: 'info' | 'warning' | 'tip' | 'error';
+  title?: string;
+}
+
+const { type = 'info', title } = Astro.props;
+
+const config: Record<string, { icon: string; border: string; bg: string; text: string }> = {
+  info: {
+    icon: 'ℹ',
+    border: 'border-blue-500',
+    bg: 'bg-blue-500/10',
+    text: 'text-blue-400',
+  },
+  warning: {
+    icon: '⚠',
+    border: 'border-amber-500',
+    bg: 'bg-amber-500/10',
+    text: 'text-amber-400',
+  },
+  tip: {
+    icon: '💡',
+    border: 'border-green-500',
+    bg: 'bg-green-500/10',
+    text: 'text-green-400',
+  },
+  error: {
+    icon: '✕',
+    border: 'border-red-500',
+    bg: 'bg-red-500/10',
+    text: 'text-red-400',
+  },
+};
+
+const c = config[type];
+---
+
+<aside class={`not-prose border-l-4 ${c.border} ${c.bg} rounded-r-lg p-4 my-6`} role="note">
+  <div class="flex items-start gap-3">
+    <span class={`${c.text} text-lg leading-none mt-0.5 select-none`} aria-hidden="true">
+      {c.icon}
+    </span>
+    <div>
+      {title && (
+        <p class={`font-heading font-bold text-sm ${c.text} mb-1`}>{title}</p>
+      )}
+      <div class="text-sm text-text-light dark:text-text [&>p]:mb-2 [&>p:last-child]:mb-0">
+        <slot />
+      </div>
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,23 @@
+---
+// src/components/TagBadge.astro
+interface Props {
+  tag: string;
+  linked?: boolean;
+}
+
+const { tag, linked = true } = Astro.props;
+const href = `/tags/${tag}`;
+---
+
+{linked ? (
+  <a
+    href={href}
+    class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-surface-light dark:bg-surface text-muted hover:text-accent transition-colors"
+  >
+    #{tag}
+  </a>
+) : (
+  <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-surface-light dark:bg-surface text-muted">
+    #{tag}
+  </span>
+)}

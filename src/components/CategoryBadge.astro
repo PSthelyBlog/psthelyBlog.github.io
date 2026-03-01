@@ -1,0 +1,26 @@
+---
+// src/components/CategoryBadge.astro
+interface Props {
+  category: 'article' | 'tool' | 'guide' | 'case-study';
+}
+
+const { category } = Astro.props;
+
+const labels: Record<string, string> = {
+  article: 'Article',
+  tool: 'Tool Review',
+  guide: 'Guide',
+  'case-study': 'Case Study',
+};
+
+const colorClasses: Record<string, string> = {
+  article: 'bg-cat-article/15 text-cat-article',
+  tool: 'bg-cat-tool/15 text-cat-tool',
+  guide: 'bg-cat-guide/15 text-cat-guide',
+  'case-study': 'bg-cat-case-study/15 text-cat-case-study',
+};
+---
+
+<span class={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium uppercase tracking-wide ${colorClasses[category]}`}>
+  {labels[category]}
+</span>

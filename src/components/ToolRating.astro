@@ -1,0 +1,24 @@
+---
+// src/components/ToolRating.astro
+interface Props {
+  rating: number;
+  label?: string;
+}
+
+const { rating, label = 'Overall Rating' } = Astro.props;
+const clampedRating = Math.min(10, Math.max(1, Math.round(rating)));
+const percentage = clampedRating * 10;
+---
+
+<div class="not-prose my-6 p-4 rounded-lg bg-surface-light dark:bg-surface border border-border-light dark:border-border">
+  <div class="flex items-center justify-between mb-2">
+    <span class="font-heading text-sm font-bold text-text-light dark:text-text">{label}</span>
+    <span class="font-heading text-2xl font-bold text-accent">{clampedRating}<span class="text-sm text-muted">/10</span></span>
+  </div>
+  <div class="w-full h-2.5 rounded-full bg-border-light dark:bg-border overflow-hidden">
+    <div
+      class="h-full rounded-full bg-accent transition-all duration-300"
+      style={`width: ${percentage}%`}
+    ></div>
+  </div>
+</div>

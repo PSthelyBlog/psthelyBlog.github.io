@@ -1,0 +1,27 @@
+---
+// src/pages/blog/[...slug].astro
+import { getCollection, render } from 'astro:content';
+import PostLayout from '@layouts/PostLayout.astro';
+import Callout from '@components/Callout.astro';
+import ToolRating from '@components/ToolRating.astro';
+import SupportCTA from '@components/SupportCTA.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+---
+
+<PostLayout post={post} headings={headings}>
+  <Content components={{
+    Callout,
+    ToolRating,
+    SupportCTA,
+  }} />
+</PostLayout>

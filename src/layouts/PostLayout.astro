@@ -1,0 +1,137 @@
+---
+// src/layouts/PostLayout.astro
+import BaseLayout from '@layouts/BaseLayout.astro';
+import TableOfContents from '@components/TableOfContents.astro';
+import CopyCodeButton from '@components/CopyCodeButton.astro';
+import CategoryBadge from '@components/CategoryBadge.astro';
+import TagBadge from '@components/TagBadge.astro';
+import Comments from '@components/Comments.astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  post: {
+    id: string;
+    data: {
+      title: string;
+      description: string;
+      pubDate: Date;
+      updatedDate?: Date;
+      category: 'article' | 'tool' | 'guide' | 'case-study';
+      tags: string[];
+      heroImage?: ImageMetadata;
+      author: string;
+      readingTime?: string;
+      toolRating?: number;
+    };
+  };
+  headings: Array<{ depth: number; slug: string; text: string }>;
+}
+
+const { post, headings } = Astro.props;
+const { data } = post;
+
+const DATE_FORMAT: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+const formatDate = (d: Date) => d.toLocaleDateString('en-US', DATE_FORMAT);
+
+const formattedDate = formatDate(data.pubDate);
+const formattedUpdatedDate = data.updatedDate ? formatDate(data.updatedDate) : null;
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  image={data.heroImage?.src}
+  type="article"
+  publishedDate={data.pubDate}
+  modifiedDate={data.updatedDate}
+  tags={data.tags}
+>
+  <article class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Post Header -->
+    <header class="max-w-prose mx-auto mb-10">
+      <!-- Category + Date -->
+      <div class="flex items-center gap-3 mb-4">
+        <CategoryBadge category={data.category} />
+        <time class="text-sm text-muted" datetime={data.pubDate.toISOString()}>
+          {formattedDate}
+        </time>
+        {data.readingTime && (
+          <span class="text-sm text-muted">· {data.readingTime}</span>
+        )}
+      </div>
+
+      <!-- Title -->
+      <h1 class="font-heading text-4xl sm:text-5xl font-bold text-text-light dark:text-text mb-4 leading-tight">
+        {data.title}
+      </h1>
+
+      <!-- Description -->
+      <p class="text-lg text-muted mb-4">{data.description}</p>
+
+      <!-- Author + Updated Date -->
+      <div class="flex items-center gap-4 text-sm text-muted">
+        <span>By {data.author}</span>
+        {formattedUpdatedDate && (
+          <span>· Updated {formattedUpdatedDate}</span>
+        )}
+      </div>
+
+      <!-- Tags -->
+      {data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {data.tags.map(tag => (
+            <TagBadge tag={tag} />
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Hero Image -->
+    {data.heroImage && (
+      <div class="max-w-prose mx-auto mb-10">
+        <Image
+          src={data.heroImage}
+          alt={data.title}
+          class="rounded-lg w-full"
+          widths={[400, 720, 1024]}
+          sizes="(max-width: 720px) 100vw, 720px"
+        />
+      </div>
+    )}
+
+    <!-- Content Area: TOC sidebar + Prose -->
+    <div class="relative max-w-6xl mx-auto lg:grid lg:grid-cols-[1fr_220px] lg:gap-10">
+      <!-- Main Content -->
+      <div class="max-w-prose">
+        <!-- Mobile TOC (inline, visible below lg) -->
+        {headings.length >= 3 && (
+          <div class="lg:hidden mb-8">
+            <TableOfContents headings={headings} />
+          </div>
+        )}
+
+        <!-- Prose Content -->
+        <div class="prose prose-lg max-w-none">
+          <slot />
+        </div>
+
+        <!-- Copy buttons on code blocks -->
+        <CopyCodeButton />
+      </div>
+
+      <!-- Desktop TOC (sticky sidebar, visible at lg+) -->
+      {headings.length >= 3 && (
+        <aside class="hidden lg:block">
+          <div class="sticky top-24">
+            <TableOfContents headings={headings} />
+          </div>
+        </aside>
+      )}
+    </div>
+
+    <!-- Comments -->
+    <div class="max-w-prose mx-auto mt-16">
+      <Comments />
+    </div>
+  </article>
+</BaseLayout>

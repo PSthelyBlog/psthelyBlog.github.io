@@ -1,0 +1,19 @@
+---
+// src/components/SupportCTA.astro
+interface Props {
+  message?: string;
+}
+
+const { message = 'Enjoying this post? Consider supporting the blog!' } = Astro.props;
+---
+
+<aside class="not-prose my-8 p-6 rounded-lg border border-accent/30 bg-accent/5 text-center">
+  <p class="text-text-light dark:text-text font-medium mb-3">{message}</p>
+  <a
+    href="/support"
+    class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-bg-light dark:text-bg font-medium text-sm hover:bg-accent-hover transition-colors"
+  >
+    <span aria-hidden="true">☕</span>
+    Buy Me a Coffee
+  </a>
+</aside>
