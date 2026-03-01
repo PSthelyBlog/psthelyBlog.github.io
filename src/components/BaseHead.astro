@@ -1,0 +1,70 @@
+---
+// src/components/BaseHead.astro
+import SEO from './SEO.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: 'website' | 'article';
+  publishedDate?: Date;
+  modifiedDate?: Date;
+  tags?: string[];
+}
+
+const {
+  title,
+  description,
+  image = '/og-default.png',
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  type = 'website',
+  publishedDate,
+  modifiedDate,
+  tags = [],
+} = Astro.props;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Font Preloading (critical fonts only — above-the-fold) -->
+<link rel="preload" href="/fonts/Outfit-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- RSS Autodiscovery -->
+<link rel="alternate" type="application/rss+xml" title="DevLog by Philippe" href={new URL('/rss.xml', Astro.site).href} />
+
+<!-- SEO: OG, Twitter Cards, JSON-LD -->
+<SEO
+  title={title}
+  description={description}
+  image={image}
+  canonicalURL={canonicalURL}
+  type={type}
+  publishedDate={publishedDate}
+  modifiedDate={modifiedDate}
+  tags={tags}
+/>
+
+<!-- Theme: FOUC Prevention -->
+<!-- This MUST be an inline blocking script in <head> to run before first paint -->
+<script is:inline>
+  (function() {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  })();
+</script>
+
+<title>{title}</title>

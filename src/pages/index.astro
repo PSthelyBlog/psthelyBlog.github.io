@@ -1,18 +1,20 @@
 ---
 // src/pages/index.astro
 // Placeholder — replaced in Step 4 (Index Pages & Navigation)
-import '../styles/global.css';
+import BaseLayout from '@layouts/BaseLayout.astro';
 ---
-<html lang="en" class="dark">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DevLog by Philippe</title>
-  </head>
-  <body class="min-h-screen bg-bg text-text flex items-center justify-center">
-    <div class="text-center">
-      <h1 class="font-heading text-4xl text-accent mb-4">DevLog by Philippe</h1>
-      <p class="text-muted">Foundation build complete. Next: Shell & Global UI.</p>
-    </div>
-  </body>
-</html>
+
+<BaseLayout title="DevLog by Philippe" description="A developer blog by Philippe — web dev, AI, Rust, DevOps, design systems, and career.">
+  <div class="mx-auto max-w-4xl px-4 py-24 text-center">
+    <p class="font-heading text-accent text-sm tracking-widest uppercase mb-4">Welcome to</p>
+    <h1 class="font-heading text-5xl sm:text-6xl font-bold text-text mb-6">
+      DevLog<span class="text-accent">.</span>
+    </h1>
+    <p class="text-lg text-muted max-w-2xl mx-auto mb-8">
+      A developer blog exploring web development, AI, Rust, DevOps, design systems, and the craft of building software.
+    </p>
+    <p class="text-sm text-muted">
+      Shell &amp; Global UI complete. Next: Post Detail &amp; MDX Components.
+    </p>
+  </div>
+</BaseLayout>

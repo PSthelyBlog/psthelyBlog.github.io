@@ -9,6 +9,63 @@
 /* === Dark Mode (class-based) === */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* === Self-Hosted Fonts === */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* === Theme: "Terminal Meets Editorial" === */
 @theme {
   /* --- Colors: Dark Mode (default) --- */
@@ -134,19 +191,28 @@
 
 /* === Code Block Enhancements (rehype-pretty-code) === */
 @layer components {
-  /* Dual-theme code blocks: show correct theme based on mode */
-  [data-rehype-pretty-code-figure] [data-theme="light"],
-  html.dark [data-rehype-pretty-code-figure] [data-theme="dark"] {
-    display: none;
+  /*
+   * rehype-pretty-code 0.14+ with multi-theme config generates a SINGLE
+   * code block per fence. Each <span> carries CSS variables:
+   *   --shiki-dark: #color   --shiki-light: #color
+   * The data-theme attribute contains space-separated theme names
+   * (e.g., "github-dark github-light").
+   *
+   * We switch which variable is applied based on the .dark class on <html>.
+   */
+
+  /* Light mode (default when .dark is absent) */
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
   }
 
-  html:not(.dark) [data-rehype-pretty-code-figure] [data-theme="light"],
-  html.dark [data-rehype-pretty-code-figure] [data-theme="dark"] {
-    display: block;
-  }
-
-  html:not(.dark) [data-rehype-pretty-code-figure] [data-theme="dark"] {
-    display: none;
+  /* Dark mode */
+  html.dark code[data-theme*=" "],
+  html.dark code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
   }
 
   /* Code block styling */

@@ -1,0 +1,119 @@
+---
+// src/components/Header.astro
+import ThemeToggle from './ThemeToggle.astro';
+
+const navItems = [
+  { label: 'Articles', href: '/articles' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'Guides', href: '/guides' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Support', href: '/support' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-border dark:border-border bg-bg/80 dark:bg-bg/80 backdrop-blur-md">
+  <nav class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16" aria-label="Main navigation">
+    <!-- Logo / Site Name -->
+    <a href="/" class="flex items-center gap-2 font-heading text-lg font-bold text-accent hover:text-accent-hover transition-colors">
+      <span aria-hidden="true">&gt;_</span>
+      <span>DevLog</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden md:flex items-center gap-1">
+      {navItems.map(item => (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+              currentPath.startsWith(item.href)
+                ? 'text-accent bg-accent/10'
+                : 'text-muted hover:text-text dark:hover:text-text hover:bg-surface dark:hover:bg-surface',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Right side: Theme toggle + Mobile menu button -->
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+
+      <!-- Mobile hamburger button -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        class="md:hidden p-2 rounded-lg text-muted hover:text-text hover:bg-surface dark:hover:text-text dark:hover:bg-surface transition-colors"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <!-- Hamburger icon -->
+        <svg id="menu-icon-open" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <!-- Close icon (hidden by default) -->
+        <svg id="menu-icon-close" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu (hidden by default) -->
+  <div id="mobile-menu" class="md:hidden hidden border-t border-border dark:border-border bg-bg dark:bg-bg">
+    <ul class="px-4 py-4 space-y-1">
+      {navItems.map(item => (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              'block px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+              currentPath.startsWith(item.href)
+                ? 'text-accent bg-accent/10'
+                : 'text-muted hover:text-text dark:hover:text-text hover:bg-surface dark:hover:bg-surface',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script is:inline>
+  (function() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    if (!btn || !menu || !iconOpen || !iconClose) return;
+
+    btn.addEventListener('click', function() {
+      const isOpen = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      btn.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+        btn.focus();
+      }
+    });
+  })();
+</script>
