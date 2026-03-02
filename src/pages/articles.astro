@@ -1,0 +1,30 @@
+---
+// src/pages/articles.astro
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CategoryNav from '@components/CategoryNav.astro';
+import PostCard from '@components/PostCard.astro';
+import { getPostsByCategory } from '@lib/posts';
+
+const posts = await getPostsByCategory('article');
+---
+
+<BaseLayout title="Articles — DevLog by Philippe" description="Long-form articles on web development, AI, Rust, DevOps, and the craft of building software.">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="font-heading text-4xl font-bold text-text-light dark:text-text mb-2">Articles</h1>
+    <p class="text-muted mb-8">Long-form explorations of topics, opinions, and concepts.</p>
+
+    <CategoryNav active="article" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {posts.map(post => (
+        <PostCard post={post} />
+      ))}
+    </div>
+
+    {posts.length === 0 && (
+      <p class="text-center text-muted py-12">
+        No articles published yet. Check back soon!
+      </p>
+    )}
+  </div>
+</BaseLayout>

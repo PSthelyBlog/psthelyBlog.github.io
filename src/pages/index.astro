@@ -1,20 +1,61 @@
 ---
 // src/pages/index.astro
-// Placeholder — replaced in Step 4 (Index Pages & Navigation)
 import BaseLayout from '@layouts/BaseLayout.astro';
+import CategoryNav from '@components/CategoryNav.astro';
+import PostCard from '@components/PostCard.astro';
+import { getPublishedPosts } from '@lib/posts';
+
+const allPosts = await getPublishedPosts();
+const featuredPosts = allPosts.filter(p => p.data.featured);
+const latestPosts = allPosts.filter(p => !p.data.featured).slice(0, 9);
 ---
 
 <BaseLayout title="DevLog by Philippe" description="A developer blog by Philippe — web dev, AI, Rust, DevOps, design systems, and career.">
-  <div class="mx-auto max-w-4xl px-4 py-24 text-center">
+  <!-- Hero Section -->
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-16 pb-12 text-center">
     <p class="font-heading text-accent text-sm tracking-widest uppercase mb-4">Welcome to</p>
     <h1 class="font-heading text-5xl sm:text-6xl font-bold text-text-light dark:text-text mb-6">
       DevLog<span class="text-accent">.</span>
     </h1>
-    <p class="text-lg text-muted max-w-2xl mx-auto mb-8">
+    <p class="text-lg text-muted max-w-2xl mx-auto">
       A developer blog exploring web development, AI, Rust, DevOps, design systems, and the craft of building software.
     </p>
-    <p class="text-sm text-muted">
-      Shell &amp; Global UI complete. Next: Post Detail &amp; MDX Components.
-    </p>
+  </section>
+
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pb-20">
+    <!-- Category Navigation -->
+    <CategoryNav active="all" />
+
+    <!-- Featured Posts -->
+    {featuredPosts.length > 0 && (
+      <section class="mb-16">
+        <h2 class="font-heading text-2xl font-bold text-text-light dark:text-text mb-6">
+          Featured
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {featuredPosts.map(post => (
+            <PostCard post={post} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Latest Posts -->
+    <section>
+      <h2 class="font-heading text-2xl font-bold text-text-light dark:text-text mb-6">
+        Latest Posts
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {latestPosts.map(post => (
+          <PostCard post={post} />
+        ))}
+      </div>
+
+      {latestPosts.length === 0 && (
+        <p class="text-center text-muted py-12">
+          No posts published yet. Check back soon!
+        </p>
+      )}
+    </section>
   </div>
 </BaseLayout>

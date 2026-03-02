@@ -1,0 +1,100 @@
+---
+// src/components/PostCard.astro
+import { Image } from 'astro:assets';
+import CategoryBadge from './CategoryBadge.astro';
+import TagBadge from './TagBadge.astro';
+import type { ImageMetadata } from 'astro';
+import type { Category } from '@lib/posts';
+
+interface Props {
+  post: {
+    id: string;
+    data: {
+      title: string;
+      description: string;
+      pubDate: Date;
+      category: Category;
+      tags: string[];
+      heroImage?: ImageMetadata;
+      toolRating?: number;
+    };
+  };
+  /** Show the tool rating on the card (for the Tools index page). */
+  showRating?: boolean;
+}
+
+const { post, showRating = false } = Astro.props;
+const { data } = post;
+
+const formattedDate = data.pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+
+const href = `/blog/${post.id}`;
+---
+
+<article class="group relative flex flex-col rounded-xl border border-border-light dark:border-border bg-bg-light dark:bg-bg overflow-hidden transition-all duration-200 hover:border-accent/50 hover:shadow-[0_0_20px_rgba(0,200,200,0.08)]">
+  <!-- Hero Image or Gradient Placeholder -->
+  <a href={href} class="block aspect-[16/9] overflow-hidden" tabindex="-1" aria-hidden="true">
+    {data.heroImage ? (
+      <Image
+        src={data.heroImage}
+        alt=""
+        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
+      />
+    ) : (
+      <div class="w-full h-full bg-gradient-to-br from-accent/20 via-surface-light dark:via-surface to-accent/5"></div>
+    )}
+  </a>
+
+  <!-- Card Body -->
+  <div class="flex flex-col flex-1 p-5">
+    <!-- Category + Date Row -->
+    <div class="flex items-center gap-2 mb-3">
+      <CategoryBadge category={data.category} />
+      <time class="text-xs text-muted" datetime={data.pubDate.toISOString()}>
+        {formattedDate}
+      </time>
+    </div>
+
+    <!-- Title (linked) -->
+    <h3 class="font-heading text-lg font-bold text-text-light dark:text-text mb-2 leading-snug">
+      <a href={href} class="after:absolute after:inset-0 hover:text-accent transition-colors">
+        {data.title}
+      </a>
+    </h3>
+
+    <!-- Description -->
+    <p class="text-sm text-muted mb-4 line-clamp-2 flex-1">
+      {data.description}
+    </p>
+
+    <!-- Tool Rating (conditional) -->
+    {showRating && data.toolRating && (
+      <div class="flex items-center gap-2 mb-3">
+        <div class="flex-1 h-1.5 rounded-full bg-border-light dark:bg-border overflow-hidden">
+          <div
+            class="h-full rounded-full bg-accent"
+            style={`width: ${Math.min(data.toolRating, 10) * 10}%`}
+          ></div>
+        </div>
+        <span class="font-heading text-sm font-bold text-accent">{data.toolRating}<span class="text-muted">/10</span></span>
+      </div>
+    )}
+
+    <!-- Tags -->
+    {data.tags.length > 0 && (
+      <div class="flex flex-wrap gap-1.5 mt-auto pt-2">
+        {data.tags.slice(0, 3).map(tag => (
+          <TagBadge tag={tag} linked={false} />
+        ))}
+        {data.tags.length > 3 && (
+          <span class="text-xs text-muted self-center">+{data.tags.length - 3}</span>
+        )}
+      </div>
+    )}
+  </div>
+</article>

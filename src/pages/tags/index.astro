@@ -1,0 +1,34 @@
+---
+// src/pages/tags/index.astro
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getAllTags } from '@lib/posts';
+
+const tags = await getAllTags();
+---
+
+<BaseLayout title="Tags — DevLog by Philippe" description="Browse all topics covered on the blog.">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="font-heading text-4xl font-bold text-text-light dark:text-text mb-2">Tags</h1>
+    <p class="text-muted mb-10">Browse posts by topic.</p>
+
+    <div class="flex flex-wrap gap-3">
+      {tags.map(({ tag, count }) => (
+        <a
+          href={`/tags/${encodeURIComponent(tag)}`}
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-light dark:bg-surface border border-border-light dark:border-border text-text-light dark:text-text hover:border-accent/50 hover:text-accent transition-colors"
+        >
+          <span class="font-medium">#{tag}</span>
+          <span class="text-xs text-muted bg-border-light dark:bg-border rounded-full px-1.5 py-0.5">
+            {count}
+          </span>
+        </a>
+      ))}
+    </div>
+
+    {tags.length === 0 && (
+      <p class="text-center text-muted py-12">
+        No tags found. Publish a post with tags to see them here!
+      </p>
+    )}
+  </div>
+</BaseLayout>

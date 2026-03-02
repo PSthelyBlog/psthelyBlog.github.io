@@ -1,0 +1,37 @@
+---
+// src/components/CategoryNav.astro
+interface Props {
+  active?: 'all' | 'article' | 'tool' | 'guide' | 'case-study';
+}
+
+const { active = 'all' } = Astro.props;
+
+const categories = [
+  { label: 'All Posts', href: '/', key: 'all' },
+  { label: 'Articles', href: '/articles', key: 'article' },
+  { label: 'Tools', href: '/tools', key: 'tool' },
+  { label: 'Guides', href: '/guides', key: 'guide' },
+  { label: 'Case Studies', href: '/case-studies', key: 'case-study' },
+];
+---
+
+<nav aria-label="Content categories" class="mb-10">
+  <ul class="flex flex-wrap gap-2">
+    {categories.map(cat => (
+      <li>
+        <a
+          href={cat.href}
+          class:list={[
+            'inline-block px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+            active === cat.key
+              ? 'bg-accent text-bg-light dark:text-bg font-bold'
+              : 'bg-surface-light dark:bg-surface text-muted hover:text-text-light dark:hover:text-text hover:bg-border-light dark:hover:bg-border',
+          ]}
+          aria-current={active === cat.key ? 'page' : undefined}
+        >
+          {cat.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

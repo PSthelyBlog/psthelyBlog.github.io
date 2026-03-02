@@ -1,0 +1,30 @@
+---
+// src/pages/case-studies.astro
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CategoryNav from '@components/CategoryNav.astro';
+import PostCard from '@components/PostCard.astro';
+import { getPostsByCategory } from '@lib/posts';
+
+const posts = await getPostsByCategory('case-study');
+---
+
+<BaseLayout title="Case Studies — DevLog by Philippe" description="Real-world project retrospectives with outcomes, lessons, and metrics.">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="font-heading text-4xl font-bold text-text-light dark:text-text mb-2">Case Studies</h1>
+    <p class="text-muted mb-8">Real-world project retrospectives with outcomes and lessons.</p>
+
+    <CategoryNav active="case-study" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {posts.map(post => (
+        <PostCard post={post} />
+      ))}
+    </div>
+
+    {posts.length === 0 && (
+      <p class="text-center text-muted py-12">
+        No case studies published yet. Check back soon!
+      </p>
+    )}
+  </div>
+</BaseLayout>
