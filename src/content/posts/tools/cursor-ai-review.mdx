@@ -1,0 +1,83 @@
+---
+title: "Cursor AI Editor: A Hands-On Review"
+description: "After 30 days with Cursor as my primary editor, here's what works, what doesn't, and whether it's worth switching from VS Code."
+pubDate: 2026-02-20
+category: "tool"
+tags: ["ai", "tools", "developer-experience", "cursor"]
+author: "Philippe"
+featured: true
+toolRating: 8
+draft: false
+---
+
+Cursor is VS Code with an AI co-pilot baked into the editor at a level that feels qualitatively different from a plugin. I've been using it as my primary editor for 30 days across an Astro project, some Rust exploration, and a handful of Python scripts. Here's what I actually think.
+
+## Setup & First Impressions
+
+Installation is a VS Code fork — download, open, done. Your extensions, keybindings, and settings migrate automatically. First launch felt like opening a familiar room that had been subtly rearranged.
+
+The standout feature on day one was Tab completion. Not autocomplete in the traditional sense, but full multi-line suggestions that complete the next logical block of code based on what you've already written:
+
+```typescript
+// You type this:
+function formatDate(date: Date): string {
+
+// Cursor completes:
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+```
+
+The completion isn't always right. But it's right often enough that accepting and correcting is faster than typing from scratch.
+
+## What Works Well
+
+The three features I use daily are Tab completion, inline chat, and codebase context — and they're genuinely good.
+
+<ToolRating rating={9} label="Code Completion" />
+
+Tab completion is the feature that makes Cursor feel different from GitHub Copilot. It's context-aware at the function level, not just the line level. When I'm writing a component, it usually knows what props I'm accessing, what utility functions exist in the file, and what pattern I'm following. The hit rate isn't 100%, but it's high enough that I'm faster with it on than off.
+
+<ToolRating rating={8} label="Inline Chat" />
+
+`Cmd+K` opens an inline chat that edits the selected code in place. This is the workflow I use for refactoring: select a function, describe the change, accept or reject the diff. It keeps me in the file rather than context-switching to a separate chat window. The model understands the surrounding code, not just the selection.
+
+## What Needs Work
+
+Cursor isn't perfect, and the rough edges are worth knowing before you pay for it.
+
+<Callout type="warning" title="Large codebase indexing is slow">
+Cursor indexes your codebase to enable "codebase-aware" completions. On repos under ~10k files, this is seamless. On larger monorepos, the initial index can take several minutes, and re-indexing on large commits introduces noticeable lag. If you work on enterprise-scale repos, test this before committing.
+</Callout>
+
+<ToolRating rating={6} label="Large Codebase Performance" />
+
+Privacy is also worth considering. By default, Cursor sends code snippets to its API for completion. There's a "privacy mode" that sends nothing, but with privacy mode on, the completions are noticeably weaker. For personal projects this isn't a concern; for proprietary code at work, check your company's policy before installing.
+
+## Cursor vs VS Code
+
+If you're evaluating whether to switch from vanilla VS Code, here's the practical comparison:
+
+| Feature | VS Code + Copilot | Cursor |
+|---------|-------------------|--------|
+| Tab completion | Line-level | Multi-line, context-aware |
+| Inline chat | Via sidebar | In-file with diff view |
+| Codebase context | Limited | Indexing + semantic search |
+| Extension compatibility | Native | High (fork), occasional gaps |
+| Privacy mode | N/A | Available, reduced capability |
+| Monthly cost | ~$10 (Copilot) | ~$20 (Pro) |
+
+The price difference is real. Cursor Pro costs twice what Copilot does. Whether that's worth it depends on how heavily you use the AI features. If you're just doing occasional autocomplete, Copilot is fine. If you're using inline chat and codebase context daily, Cursor earns the premium.
+
+## The Verdict
+
+After 30 days, I'm keeping Cursor. The Tab completion and inline chat workflow are faster than what I had before, and the quality is consistently good on the kinds of TypeScript, Astro, and Rust code I write.
+
+<ToolRating rating={8} label="Overall" />
+
+The caveats are real — large codebase performance, privacy tradeoffs, the learning curve on effective prompting — but none of them are dealbreakers for how I work. If you're comfortable with VS Code and curious about AI-assisted editing, Cursor is the most polished option available right now.
+
+<SupportCTA message="Found this review helpful? Support the blog so I can keep testing tools!" />

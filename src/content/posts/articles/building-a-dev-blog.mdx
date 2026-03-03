@@ -1,0 +1,117 @@
+---
+title: "Building a Dev Blog in 2026: Why I Chose Astro"
+description: "A look at the modern static site landscape and why Astro's island architecture won out over Next.js, Hugo, and Eleventy for a developer blog."
+pubDate: 2026-02-15
+category: "article"
+tags: ["astro", "web-dev", "architecture", "javascript"]
+author: "Philippe"
+featured: true
+draft: false
+---
+
+I've been meaning to start a dev blog for years. Not because I thought the world needed another one, but because writing forces me to actually understand what I'm doing. When I finally sat down to build it, I spent more time picking the framework than writing the first post. Here's what I looked at, what I ruled out, and why I landed on Astro.
+
+The core requirements were simple: fast output, low maintenance, and a writing experience that gets out of my way. I wanted to own my content in plain markdown files, not export it from some SaaS CMS. And I didn't want to ship a kilobyte of client-side JavaScript just to render a static blog post.
+
+## What I Looked At
+
+I evaluated four options that come up in every "static site generator" conversation in 2026.
+
+| Framework | Language | JS Output | MDX Support | Learning Curve |
+|-----------|----------|-----------|-------------|----------------|
+| Astro 5.x | HTML-first | Zero by default | Built-in | Medium |
+| Next.js 15 | React | Full React runtime | Via plugin | High |
+| Hugo | Go templates | None | Limited | Medium |
+| Eleventy 3.x | Nunjucks/JS | None native | Via plugin | Medium |
+
+Hugo was tempting for pure speed — it's the fastest builder and the output is genuinely zero-JS. But Go templates age poorly and MDX support is bolted on. Eleventy has a great philosophy but felt like assembling components from a parts bin. Next.js is overkill for a blog; the full React runtime on every page is weight I don't need.
+
+## Why Astro Won
+
+### Island Architecture
+
+Astro's "islands" mental model clicked immediately. Every page is static HTML by default. When you need interactivity — a theme toggle, a search box — you opt in with `client:load` or `client:visible`. The rest stays HTML. For a blog, that means zero JavaScript shipped to the reader unless I explicitly need it.
+
+Here's what a typical Astro component looks like:
+
+```astro
+---
+// src/components/PostCard.astro
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, tags } = post.data;
+---
+
+<article class="rounded-lg border border-border p-6">
+  <h2 class="font-heading text-xl">{title}</h2>
+  <p class="text-muted mt-2">{description}</p>
+  <time>{pubDate.toLocaleDateString()}</time>
+</article>
+```
+
+No virtual DOM, no hydration waterfall. The component runs at build time and produces HTML. That's it.
+
+### Content Collections
+
+The content collections API changed how I think about structured content. You define a Zod schema once:
+
+```typescript
+const posts = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      pubDate: z.coerce.date(),
+      category: z.enum(['article', 'tool', 'guide', 'case-study']),
+      tags: z.array(z.string()).default([]),
+      featured: z.boolean().default(false),
+    }),
+});
+```
+
+Every post frontmatter is validated against that schema at build time. Typos in a `pubDate`, wrong category value, missing required field — all caught before the build outputs a single file. It's the kind of guardrail that makes refactoring feel safe.
+
+## The Stack
+
+After picking Astro, the rest came together quickly. Tailwind v4 for styling, MDX for content, Giscus for comments.
+
+<Callout type="info" title="Tailwind v4 is CSS-first">
+Tailwind v4 dropped the JavaScript config file entirely. You configure everything — custom colors, fonts, variants — directly in your CSS with `@theme`, `@plugin`, and `@custom-variant`. It's a big shift if you're used to `tailwind.config.js`, but the result is a faster build and a simpler mental model.
+</Callout>
+
+MDX is the right choice for a developer blog. Plain markdown handles 90% of posts, and when you need a custom component — a styled callout, a rating bar, a support prompt — you drop it in like JSX. No shortcodes, no special syntax, just components.
+
+<Callout type="tip">
+Astro 5.x passes custom components to MDX via the `components` prop on `<Content />`. That means your MDX files don't need any import statements — you register the components once in your post layout and every post can use them.
+</Callout>
+
+Giscus ties comments to GitHub Discussions, which means no separate comment database to maintain and no privacy-invasive third-party scripts. Readers with a GitHub account can comment. Everyone else can read the discussion.
+
+## Tradeoffs
+
+Astro isn't the right choice for everything, and I want to be honest about where it falls short.
+
+<Callout type="warning" title="Not for SPAs or highly dynamic apps">
+If you're building something with complex client-side state — a dashboard, a real-time feed, a form-heavy application — Astro's static-first model will feel like fighting the framework. React or SvelteKit will serve you better. Astro shines for content-heavy sites where most pages are read-only.
+</Callout>
+
+The build time also increases with content volume. A blog with 20 posts builds in seconds; at thousands of posts, incremental builds matter. Astro has made progress here with its content layer API, but it's worth knowing the limitation before you commit.
+
+## What's Next
+
+Now that the foundation is in place, I want to write about the actual experience of building with these tools. Upcoming topics include Tailwind v4 setup, Pagefind integration for search, and a post on using AI tools for the build itself.
+
+<Callout type="error" title="Don't start with SSR when you don't need it">
+If you're building a blog or marketing site, resist the temptation to add a server adapter from day one. Start static, measure what you actually need, and add dynamic behavior only when a static approach genuinely won't work. Every adapter you add is a deployment constraint and a debugging surface.
+</Callout>
+
+## Conclusion
+
+In 2026, the static site generator landscape is mature. Any of the tools I evaluated would have worked. What differentiated Astro for me was the combination of zero-JS-by-default, first-class MDX support, and the content collections API. Together they make it easy to ship fast pages, write freely in markdown, and trust that the build will catch my mistakes before readers see them.
+
+If you're building a dev blog and the JavaScript frameworks feel like too much overhead, Astro is worth a serious look.

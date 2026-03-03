@@ -1,0 +1,111 @@
+---
+title: "Rebuilding My Portfolio with AI-Assisted Development"
+description: "How I used AI coding tools to rebuild a portfolio site in a weekend — what worked, what didn't, and the surprising productivity gains."
+pubDate: 2026-03-01
+category: "case-study"
+tags: ["ai", "case-study", "productivity", "web-dev"]
+author: "Philippe"
+draft: false
+---
+
+Last fall my portfolio site was embarrassing. Three-year-old React app, a Webpack config I was afraid to touch, and a design that looked fine in 2021. I'd been putting off the rebuild because I knew it was going to be a weekend project. Then I decided to do the whole thing with AI-assisted development and see how fast I could actually move.
+
+This is the story of that rebuild — what I tried, what surprised me, and what I'd do differently.
+
+## The Before
+
+The old site was a Create React App project that had accumulated the usual debt: a pinned Node version, three different CSS approaches coexisting in the same codebase, and a `node_modules` folder I hadn't touched in two years. Deploying required a manual `npm run build` and an SFTP upload. It worked, but I'd stopped updating it because the maintenance cost felt out of proportion to the benefit.
+
+> The worst kind of technical debt isn't the code that breaks — it's the code that works well enough that you never have to fix it, so you never learn anything from it.
+
+The site had no analytics, no contact form that worked reliably, and a blog section I'd added and never populated. Classic developer portfolio.
+
+## The Approach
+
+I decided to rebuild with Astro for the same reasons I later chose it for this blog: static output, zero client JS by default, content collections for the blog section. The AI angle was the experiment: I wanted to use Claude and Cursor to write as much of the boilerplate as possible and see where they actually helped versus where I had to think for myself.
+
+<Callout type="info" title="The AI workflow I used">
+My workflow: write a spec in plain English describing what I wanted — component behavior, data shape, visual design — then use Cursor's inline chat to generate the initial implementation, review the output, and iterate. For complex logic I wrote the first draft myself and used AI to refactor. For pure boilerplate I started with AI output.
+</Callout>
+
+The tools: Cursor for code editing with inline AI, Claude for longer architectural questions and spec writing, and the existing Tailwind docs for styling reference.
+
+## The Build
+
+I started Friday evening and finished Sunday afternoon — about 16 hours of actual work spread across the weekend. Honest accounting:
+
+| Phase | Time | Notes |
+|-------|------|-------|
+| Setup & scaffolding | 2 hrs | Astro project, Tailwind, MDX, deploy config |
+| Component development | 6 hrs | Header, footer, project cards, blog layout |
+| Content migration | 3 hrs | Moving projects, rewriting descriptions |
+| Styling polish | 3 hrs | Dark mode, typography, responsive layout |
+| Deploy & QA | 2 hrs | GitHub Pages, DNS, Lighthouse passes |
+
+Here's an example of the kind of component AI handled well — a project card that needed a consistent layout but no interesting logic:
+
+```astro
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  tags: string[];
+  year: number;
+}
+
+const { title, description, url, tags, year } = Astro.props;
+---
+
+<article class="rounded-lg border border-border p-6 hover:border-accent transition-colors">
+  <div class="flex items-start justify-between gap-4">
+    <h3 class="font-heading font-bold text-text">{title}</h3>
+    <span class="text-muted text-sm shrink-0">{year}</span>
+  </div>
+  <p class="text-muted mt-2 text-sm">{description}</p>
+  <div class="mt-4 flex flex-wrap gap-2">
+    {tags.map(tag => (
+      <span class="text-xs px-2 py-1 rounded bg-surface text-muted">{tag}</span>
+    ))}
+  </div>
+</article>
+```
+
+The AI generated this in one shot. I reviewed it, adjusted the class names to match my design tokens, and moved on. That pattern — generate, review, adjust — repeated about 20 times over the weekend.
+
+## Results
+
+The rebuilt site is measurably better on every metric I care about:
+
+| Metric | Old Site | New Site |
+|--------|----------|----------|
+| Lighthouse Performance | 71 | 98 |
+| Lighthouse Accessibility | 83 | 100 |
+| First Contentful Paint | 2.1s | 0.4s |
+| Total Blocking Time | 340ms | 0ms |
+| Bundle size (JS) | 142kb | 0kb |
+| Deploy process | Manual SFTP | Git push |
+
+The bundle size going to zero was the most satisfying number. There is genuinely no JavaScript on the portfolio pages — it's all HTML and CSS. The contact form goes through a Netlify form handler. The blog is static MDX.
+
+<Callout type="tip" title="The single biggest leverage point">
+The AI was most useful for the first draft of components I'd written before but didn't want to think through again. Project cards, navigation, footer, post listing — these are solved problems. Spending cognitive energy on them is waste. Let the AI write the boilerplate; spend your focus on the parts that are actually specific to your project.
+</Callout>
+
+## What I'd Do Differently
+
+The weekend rebuild worked, but there were friction points I'd smooth out on the next project.
+
+I should have written the design tokens first. I ended up with color variables that were slightly inconsistent between components because I defined them incrementally as I went. Defining the full palette upfront — backgrounds, text, borders, accent — would have saved two hours of cleanup on Sunday.
+
+I also accepted too many AI suggestions without reading them carefully in the first few hours, when I was moving fast. I ended up with a few components that worked but used patterns I wouldn't have chosen myself, and unpicking them cost more time than careful review upfront would have.
+
+> AI-assisted development doesn't make you faster by eliminating decisions. It makes you faster by shifting which decisions you spend time on. You still have to know what good looks like.
+
+## Conclusion
+
+The rebuild took a weekend instead of a month. Not because AI wrote everything — it didn't — but because it handled the parts of the project that would have been tedious and correct-but-boring to write. That freed up focus for the parts that actually required taste and judgment.
+
+The portfolio is live. The blog section actually has posts in it now.
+
+<SupportCTA />

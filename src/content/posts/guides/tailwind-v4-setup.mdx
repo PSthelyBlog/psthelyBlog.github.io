@@ -1,0 +1,154 @@
+---
+title: "Setting Up Tailwind CSS v4 in an Astro Project"
+description: "A step-by-step guide to configuring Tailwind v4 with the Vite plugin in Astro 5.x, including dark mode, typography, and common pitfalls."
+pubDate: 2026-02-25
+category: "guide"
+tags: ["tailwind", "astro", "css", "tutorial"]
+author: "Philippe"
+draft: false
+---
+
+Tailwind v4 rethinks how you configure the framework. If you're used to `tailwind.config.js`, the new CSS-first approach takes some adjustment — but once it clicks, it's cleaner. This guide walks through a complete Tailwind v4 setup in an Astro 5.x project, including dark mode and the Typography plugin.
+
+**Prerequisites**: Node.js 18+, an Astro 5.x project (`npm create astro@latest`), basic familiarity with Tailwind.
+
+## Step 1: Install Dependencies
+
+Install the Tailwind v4 Vite plugin and the Typography plugin:
+
+```bash
+npm install tailwindcss @tailwindcss/vite @tailwindcss/typography
+```
+
+<Callout type="warning" title="Pin the version">
+Tailwind v4 is still in active development. Minor releases can include breaking changes. Pin to a specific version in your `package.json` (e.g., `"tailwindcss": "4.1.10"`) and review the changelog before upgrading.
+</Callout>
+
+## Step 2: Configure the Vite Plugin
+
+Open `astro.config.mjs` and add the Tailwind Vite plugin:
+
+```javascript
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
+import mdx from '@astrojs/mdx';
+
+export default defineConfig({
+  integrations: [mdx()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});
+```
+
+The key detail: `tailwindcss()` goes in `vite.plugins`, **not** in `integrations`. The Vite plugin is how Tailwind v4 hooks into the build pipeline. There is no `@astrojs/tailwind` integration in v4 — the old integration is a v3 pattern.
+
+## Step 3: Create Your CSS
+
+Create `src/styles/global.css` (or wherever your main stylesheet lives):
+
+```css
+/* Import the Tailwind base */
+@import "tailwindcss";
+
+/* Enable the Typography plugin */
+@plugin "@tailwindcss/typography";
+
+/* Define your design tokens */
+@theme {
+  --color-accent: oklch(0.75 0.18 175);
+  --color-accent-hover: oklch(0.68 0.16 175);
+  --font-family-heading: "JetBrains Mono", monospace;
+  --font-family-body: "Inter", sans-serif;
+}
+
+/* Dark mode variant */
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
+<Callout type="tip" title="CSS-first configuration">
+In Tailwind v4, your CSS file is the config file. `@theme` replaces the `theme.extend` block in `tailwind.config.js`. `@plugin` replaces the `plugins` array. You no longer need a separate config file for most projects.
+</Callout>
+
+Import this stylesheet from your base layout:
+
+```astro
+---
+// src/layouts/BaseLayout.astro
+import '../styles/global.css';
+---
+```
+
+## Step 4: Set Up Dark Mode
+
+The `@custom-variant dark` line in your CSS defines when dark mode applies. The simplest approach: toggle a `dark` class on `<html>` and persist the preference in `localStorage`.
+
+Add this script to your `<head>` — it must run before the page renders to avoid a flash of the wrong theme:
+
+```javascript
+// Inline script in BaseLayout.astro (use is:inline to skip processing)
+(function () {
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = stored === 'dark' || (!stored && prefersDark);
+  document.documentElement.classList.toggle('dark', isDark);
+})();
+```
+
+Then wire up a toggle button to flip the class and update `localStorage`:
+
+```javascript
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+```
+
+## Step 5: Add Typography
+
+The Typography plugin is already enabled via `@plugin "@tailwindcss/typography"` in your CSS. To apply prose styling to post content, add the `prose` class to your content wrapper:
+
+```astro
+---
+// src/layouts/PostLayout.astro
+const { post } = Astro.props;
+---
+
+<article class="prose prose-lg max-w-none">
+  <slot />
+</article>
+```
+
+Note the absence of `dark:prose-invert`. If you're setting custom `--tw-prose-*` variables in `@theme` for both light and dark modes, adding `dark:prose-invert` will override your custom values with Typography's defaults in dark mode. Only use `dark:prose-invert` if you're relying entirely on the Typography plugin's built-in dark palette.
+
+You can customize the prose styling with `@theme` variables. For example, to change the link color:
+
+```css
+@theme {
+  --tw-prose-links: oklch(0.75 0.18 175);
+  --tw-prose-invert-links: oklch(0.75 0.18 175);
+}
+```
+
+## Common Pitfalls
+
+After setting this up on a few projects, these are the mistakes I've seen (and made):
+
+<Callout type="error" title="Don't use @astrojs/tailwind with v4">
+The `@astrojs/tailwind` integration is a wrapper for Tailwind v3. Using it with Tailwind v4 will either fail or silently produce unexpected output. Always use `@tailwindcss/vite` directly in `vite.plugins` when working with v4.
+</Callout>
+
+<Callout type="info">
+If you're using scoped `<style>` blocks inside Astro components and need Tailwind utilities via `@apply`, add `@reference "tailwindcss"` at the top of the style block. Without it, the build won't resolve your design tokens in scoped styles.
+</Callout>
+
+<Callout type="warning">
+The `@custom-variant dark` syntax requires that you control when the `dark` class is applied. Server-side rendering with `prefers-color-scheme` media queries alone won't work — you need the `localStorage` script to avoid theme flicker on page load.
+</Callout>
+
+## Wrap-Up
+
+Tailwind v4 in Astro is a clean setup once you understand where each piece goes: Vite plugin in `astro.config.mjs`, configuration in your CSS file, dark mode via a class variant and a small inline script. The main adjustment is moving config out of JavaScript and into CSS — after which the whole thing feels simpler and more composable.
+
+If you run into issues, the most common culprits are the wrong integration name (`@astrojs/tailwind` vs `@tailwindcss/vite`) and missing `@reference` in scoped style blocks.
