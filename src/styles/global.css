@@ -242,6 +242,37 @@
  * components rules even at lower specificity.
  */
 
+/* Prose headings — both modes (Typography plugin resets --tw-prose-headings)
+ * Also targets anchor children — rehype-autolink-headings wraps heading text
+ * in <a> tags, which inherit the prose link color instead of the heading color. */
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"],[class~="not-prose"] *)),
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"],[class~="not-prose"] *)) a {
+  color: var(--color-text-light);
+}
+
+html.dark .prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"],[class~="not-prose"] *)),
+html.dark .prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"],[class~="not-prose"] *)) a {
+  color: var(--color-text);
+}
+
+/* Prose bold text — both modes (Typography plugin resets --tw-prose-bold) */
+.prose :where(strong, b):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--color-text-light);
+}
+
+html.dark .prose :where(strong, b):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--color-text);
+}
+
+/* Prose table cells — both modes (Typography plugin resets table color vars) */
+.prose :where(th, td):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--color-text-light);
+}
+
+html.dark .prose :where(th, td):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--color-text);
+}
+
 /* Prose body text — dark mode (Typography plugin resets --tw-prose-body) */
 html.dark .prose :where(p, li, blockquote, dd, dt):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
   color: var(--color-text);
