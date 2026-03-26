@@ -1,7 +1,7 @@
 ---
 // src/components/CategoryNav.astro
 interface Props {
-  active?: 'all' | 'article' | 'tool' | 'guide' | 'case-study';
+  active?: 'all' | 'article' | 'tool' | 'guide' | 'case-study' | 'course';
 }
 
 const { active = 'all' } = Astro.props;
@@ -12,6 +12,7 @@ const categories = [
   { label: 'Tools', href: '/tools', key: 'tool' },
   { label: 'Guides', href: '/guides', key: 'guide' },
   { label: 'Case Studies', href: '/case-studies', key: 'case-study' },
+  { label: 'Courses', href: '/courses', key: 'course' },
 ];
 ---
 

@@ -1,7 +1,7 @@
 // src/lib/posts.ts
 import { getCollection } from 'astro:content';
 
-export type Category = 'article' | 'tool' | 'guide' | 'case-study';
+export type Category = 'article' | 'tool' | 'guide' | 'case-study' | 'course';
 
 /** Fetch all published (non-draft) posts, sorted newest first. */
 export async function getPublishedPosts() {

@@ -11,7 +11,7 @@ const posts = defineCollection({
       description: z.string(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
-      category: z.enum(['article', 'tool', 'guide', 'case-study']),
+      category: z.enum(['article', 'tool', 'guide', 'case-study', 'course']),
       tags: z.array(z.string()).default([]),
       draft: z.boolean().default(false),
       heroImage: image().optional(),
