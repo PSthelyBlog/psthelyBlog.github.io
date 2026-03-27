@@ -6,6 +6,7 @@ import CopyCodeButton from '@components/CopyCodeButton.astro';
 import CategoryBadge from '@components/CategoryBadge.astro';
 import TagBadge from '@components/TagBadge.astro';
 import Comments from '@components/Comments.astro';
+import SupportCTA from '@components/SupportCTA.astro';
 import { Image } from 'astro:assets';
 
 interface Props {
@@ -129,8 +130,13 @@ const formattedUpdatedDate = data.updatedDate ? formatDate(data.updatedDate) : n
       )}
     </div>
 
-    <!-- Comments -->
+    <!-- Support CTA -->
     <div class="max-w-prose mx-auto mt-16">
+      <SupportCTA />
+    </div>
+
+    <!-- Comments -->
+    <div class="max-w-prose mx-auto mt-12">
       <Comments />
     </div>
   </article>
