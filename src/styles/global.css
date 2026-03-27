@@ -243,6 +243,15 @@
  * components rules even at lower specificity.
  */
 
+/* Prose links — both modes (Typography plugin resets --tw-prose-links) */
+.prose :where(a):not(:where([class~="not-prose"],[class~="not-prose"] *)):not(h1 a, h2 a, h3 a, h4 a, h5 a, h6 a) {
+  color: var(--color-accent);
+}
+
+html.dark .prose :where(a):not(:where([class~="not-prose"],[class~="not-prose"] *)):not(h1 a, h2 a, h3 a, h4 a, h5 a, h6 a) {
+  color: var(--color-accent);
+}
+
 /* Prose headings — both modes (Typography plugin resets --tw-prose-headings)
  * Also targets anchor children — rehype-autolink-headings wraps heading text
  * in <a> tags, which inherit the prose link color instead of the heading color. */
