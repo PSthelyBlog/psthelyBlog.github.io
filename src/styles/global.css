@@ -88,6 +88,7 @@
   --color-cat-tool: oklch(0.75 0.15 150);
   --color-cat-guide: oklch(0.75 0.15 50);
   --color-cat-case-study: oklch(0.75 0.15 320);
+  --color-cat-course: oklch(0.75 0.15 200);
 
   /* --- Typography --- */
   --font-heading: 'JetBrains Mono', ui-monospace, monospace;
