@@ -5,6 +5,7 @@ import PostLayout from '@layouts/PostLayout.astro';
 import Callout from '@components/Callout.astro';
 import ToolRating from '@components/ToolRating.astro';
 import SupportCTA from '@components/SupportCTA.astro';
+import AIDisclosure from '@components/AIDisclosure.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -23,5 +24,6 @@ const { Content, headings } = await render(post);
     Callout,
     ToolRating,
     SupportCTA,
+    AIDisclosure,
   }} />
 </PostLayout>
