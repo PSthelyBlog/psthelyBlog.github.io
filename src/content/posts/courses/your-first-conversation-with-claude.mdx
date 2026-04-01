@@ -1,0 +1,189 @@
+---
+title: "Your First Conversation with Claude"
+description: "How to write your first prompt, give Claude the context it needs, upload files for analysis, and iterate when the first response doesn't quite land."
+pubDate: 2026-04-01
+category: "course"
+tags: ["ai", "claude", "productivity", "getting-started", "prompting"]
+author: "Philippe"
+featured: true
+draft: false
+---
+
+<AIDisclosure />
+
+You've signed up for Claude, opened the interface, and now you're looking at a blank text box. What do you say? How do you start? And once Claude responds, how do you know if the response is actually good — and what do you do if it isn't?
+
+These are the questions this lesson is designed to answer. Starting a conversation with Claude isn't difficult, but there's a meaningful difference between using Claude casually and using it *well*. This post walks you through how to write your first prompt, how to give Claude the context it needs to be useful, how to upload files for analysis, and — critically — how to iterate when the first response doesn't quite land. Because it often won't, and that's completely normal.
+
+## Talk to Claude Like a Coworker
+
+The single most important piece of advice for your first conversation is this: speak to Claude the way you'd speak to a knowledgeable colleague. Naturally. Conversationally. You don't need special syntax, technical commands, or a particular format. Just tell Claude what you need.
+
+Your prompts can be as simple as a question — "How do I structure a project kickoff meeting?" — or as complex as a multi-step request involving analysis, writing, and formatting. Claude handles both. The key is to be clear about what you're asking for and to provide enough context for Claude to give you something useful in return.
+
+This feels obvious once you've done it a few times, but many first-time users either over-formalize their messages (writing stiff, robotic instructions) or under-specify them (tossing in a vague request and hoping for the best). Neither approach gets the best results. The sweet spot is somewhere in between: natural language, with enough detail that Claude doesn't have to guess what you mean.
+
+## A Simple Framework for Writing Prompts
+
+You don't need to memorize a formula every time you write a message to Claude, but when you're starting out, it helps to think about three elements before you hit send.
+
+**Setting the stage** means giving Claude the background it needs. Who are you? What's the situation? What does Claude need to know to do this well? This doesn't have to be a lengthy preamble — a sentence or two is often enough. For example: "I'm a marketing manager preparing a quarterly review for my leadership team. Our main channel is email campaigns targeting enterprise buyers."
+
+**Defining the task** means telling Claude what you actually want it to do. Be specific. "Write a summary" is a task. "Analyze this data and highlight the three biggest takeaways" is a better one. The more precisely you describe the action — write, analyze, compare, brainstorm, rewrite, explain — the more precisely Claude can respond.
+
+**Specifying rules** means adding any constraints or preferences. Do you want the response under 200 words? In bullet points? In a formal tone? Should Claude avoid certain topics or focus on a particular angle? These details shape the output. Without them, Claude will make reasonable assumptions — but your assumptions and Claude's don't always align, which is why being explicit pays off.
+
+Here's what this looks like in practice:
+
+```
+I'm a product manager at a B2B SaaS company. We just finished user interviews
+for a new onboarding feature.
+
+Analyze the attached interview transcripts and create a one-page summary of
+the top five user pain points, ranked by frequency. Use plain language — this
+will go to our engineering team, not executives.
+```
+
+Notice how natural that reads. There's no special formatting, no code, no brackets or tags. It's just a clear, specific request with enough context for Claude to deliver something useful.
+
+<Callout type="tip" title="Specificity is your best friend">
+The more specific your request, the better Claude can assist you. Instead of "help me with my presentation," try "create an outline for a 10-minute presentation on Q3 revenue trends, aimed at our board of directors, with three key recommendations." The extra thirty seconds of clarity in your prompt can save several rounds of back-and-forth.
+</Callout>
+
+## Uploading Files for Richer Conversations
+
+One of the most practically useful things about Claude is that you can upload files directly into a conversation. This transforms Claude from a general-purpose writing assistant into something much more powerful: a collaborator that can work with *your* actual documents, data, and materials.
+
+Claude supports a range of document types including PDF, DOCX, CSV, TXT, HTML, ODT, RTF, EPUB, JSON, and XLSX (the last requires code execution to be enabled in your settings). It also supports image formats like JPEG, PNG, GIF, and WebP.
+
+To upload a file, click the "+" button in the lower left corner of the chat box and select "Add files or photos," or simply drag and drop files directly into the chat window. You can also copy and paste images from your clipboard. Once a file is attached, Claude reads and parses it automatically, using the contents as context for your conversation.
+
+This opens up an entire category of work that wouldn't be possible with text prompts alone. You can upload a PDF of a contract and ask Claude to summarize the key terms. You can attach a CSV of sales data and ask Claude to identify trends. You can share a DOCX draft and ask Claude to tighten the language or restructure the argument. You can even upload an image of a whiteboard sketch and ask Claude to turn it into a structured outline.
+
+<Callout type="info" title="A note on large files">
+When working with larger documents, keep in mind that Claude's context window — the amount of text it can hold in working memory during a conversation — is generous but not unlimited. If you're working with very large files, consider dividing them into smaller sections. For PDFs specifically, when referring to certain pages, use the page numbers as shown in your PDF viewer rather than the numbers printed on the document itself.
+</Callout>
+
+## The Iteration Mindset
+
+Here's something that separates people who get moderate value from Claude from those who get exceptional value: the willingness to iterate.
+
+Your first prompt will rarely produce a perfect result. That's not a failure — it's how the process works. Think of your first message as the opening move in a conversation, not a one-shot command. Claude's initial response gives you something to react to, refine, and redirect. The real quality emerges over the course of the exchange, not from a single prompt.
+
+This is what we call the **iteration mindset**, and it's one of the most important skills you can develop as a Claude user.
+
+### How to Iterate Effectively
+
+When Claude's response isn't quite right, resist the urge to start over from scratch. Instead, give specific feedback in your follow-up message. The more precise your feedback, the faster Claude can course-correct.
+
+**Ask follow-up questions** when you need more detail or a different angle. "Can you expand on the second point?" or "What would this look like for a team of five versus fifty?" These kinds of targeted follow-ups let you drill into the parts that matter without re-explaining the entire context.
+
+**Give direct feedback** when the output misses the mark on style, tone, or approach. "This is too formal — rewrite it as if you're explaining it to a colleague over coffee." Or: "Good structure, but the recommendations are too vague. Make each one actionable with a specific next step." Claude responds well to this kind of coaching because it can adjust its output without losing the context of the conversation.
+
+**Redirect** when Claude misunderstands the question. "I wasn't asking about X — I meant Y. Let's focus on that." This happens, especially with ambiguous prompts, and it's easily corrected.
+
+**Start a new chat** when the conversation has gone too far off track, or when you want to try a fundamentally different approach. Sometimes the most efficient move is a fresh start with a better-crafted initial prompt, informed by what you learned from the first attempt.
+
+<Callout type="tip" title="Treat the first output as a draft">
+The professionals who get the most out of Claude treat every first response as a starting point, not a finished product. Plan to spend two or three messages refining the output. This small investment in iteration consistently produces dramatically better results than trying to write the perfect prompt on the first try.
+</Callout>
+
+## When Claude Gets It Wrong
+
+Claude is remarkably capable, but it is not infallible. Understanding the ways it can fall short — and knowing how to handle those situations — is an essential part of working with it effectively.
+
+### Hallucinations
+
+The most important limitation to understand is what's known as **hallucination**. This is a term used across the AI field to describe situations where a language model generates information that sounds plausible and confident but is actually incorrect. Claude might cite a statistic that doesn't exist, attribute a quote to the wrong person, or describe a process with a step that's subtly wrong.
+
+This happens because of how language models work at a fundamental level. Claude generates responses based on patterns learned during training — it doesn't look things up in a database or verify claims against a source of truth in real time (unless it's using web search). Most of the time, the patterns it draws on produce accurate, useful information. But occasionally, the same mechanism that enables fluent, knowledgeable responses can produce confident-sounding errors.
+
+The practical takeaway: for high-stakes work — anything involving specific facts, figures, legal details, medical information, or financial data — always verify Claude's claims independently. You can also ask Claude to cite its sources or flag areas of uncertainty, which can help you identify where additional verification is needed.
+
+### Claims About Capabilities It Doesn't Have
+
+Another form of hallucination worth noting: Claude can sometimes claim to have capabilities it doesn't actually possess. For example, it might say it has sent an email, accessed a website, or created a file in an external system — when in reality it has only done these things if the relevant tools are explicitly connected and integrated. Unless you've set up a specific connector (like Gmail or Google Drive), Claude cannot interact with external services on your behalf. If Claude claims otherwise, that's a hallucination about its own capabilities, and you should disregard the claim.
+
+### Responses That Are Off-Target
+
+Sometimes the response isn't wrong — it's just not what you wanted. Too long, too short, too formal, too generic, focused on the wrong aspect of the question. These aren't hallucinations; they're mismatches between what you had in mind and what Claude inferred from your prompt. The fix is almost always iteration: give Claude specific feedback about what to change, and it will adjust.
+
+Here's a quick reference for the most common mismatches and how to address them:
+
+**Too generic?** Add your role, audience, and specific constraints. "I'm writing for CFOs at mid-market companies, not a general audience."
+
+**Wrong length?** Be explicit. "Keep this under 100 words" or "I need a comprehensive overview — don't hold back on detail."
+
+**Wrong format?** Describe the structure you want, or show an example. "Use three short paragraphs, not bullet points."
+
+**Wrong tone?** Tell Claude what you're looking for in plain language. "This reads like a textbook. Make it sound like a smart friend explaining the concept over lunch." You can also provide a writing sample and ask Claude to match the style.
+
+## Personalizing How Claude Communicates
+
+As you use Claude more, you'll develop preferences for how it responds — how much detail you want, how formal the language should be, whether you prefer bullet points or flowing prose. Claude offers several ways to encode these preferences so you don't have to repeat them in every conversation.
+
+**Profile preferences** are account-wide settings that apply to all your conversations. You can set these by clicking your initials in the lower left corner of the interface and adding information about your general preferences. For example, you might note that you prefer concise responses, that you work in healthcare, or that you always want Claude to explain its reasoning. These preferences travel with you across every chat.
+
+**Styles** let you adjust the tone and format of Claude's responses on the fly. Claude offers several preset styles — Normal, Concise, Explanatory, and Formal — that you can switch between at any time during a conversation. If none of the presets fit, you can create a custom style by providing your own writing samples or specific instructions. This is particularly useful if you have a distinct communication voice that you want Claude to match consistently.
+
+To access styles, click the "Search and tools" menu in the lower left corner of the chat interface and select the style you'd like. You can switch between styles mid-conversation, and Claude will apply the new style to its subsequent responses.
+
+<Callout type="info" title="Styles versus profile preferences">
+Profile preferences and styles serve different purposes. Preferences give Claude background context about you — your role, your industry, your general communication preferences. Styles control specifically how Claude formats and delivers its responses. You can use both together: preferences set the context, styles set the voice.
+</Callout>
+
+## Building Continuity Across Conversations
+
+One practical concern new users often raise is continuity: if every conversation starts fresh, how do you build on previous work without re-explaining everything?
+
+Claude offers two features that address this directly.
+
+**Chat search** allows you to search through your previous conversations with Claude to find relevant information from earlier sessions. If you discussed a project plan last week and want to pick up where you left off, you can ask Claude to search for it. It will pull together the appropriate context so you don't have to re-enter everything from memory. Chat search is available on paid plans across the web, desktop, and mobile apps.
+
+**Memory** goes a step further. When enabled, Claude automatically generates summaries of your conversations and builds a synthesis of key insights across your chat history. This synthesis updates every 24 hours and provides background context for every new conversation you start. Over time, Claude develops an understanding of your work, preferences, and ongoing projects — transforming from a blank-slate assistant into a collaborator that already knows the lay of the land.
+
+You can manage both features from your settings. Memory can be paused (Claude keeps what it knows but stops learning new things) or reset entirely (permanently deleting all stored context). You maintain full control over what Claude remembers and when.
+
+## Developing AI Fluency
+
+Using Claude effectively is a skill, and like any skill, it develops with practice. The course materials describe this as **AI Fluency** and break it into four core competencies — a framework worth keeping in mind as you build your practice.
+
+**Delegation** is the ability to identify which tasks are well-suited for Claude and which are better handled by a human. Not everything benefits from AI assistance, and part of working well with Claude is knowing when to use it and when not to.
+
+**Description** is the ability to articulate what you need clearly enough for Claude to deliver it. This is the prompting skill — the art of translating your intent into language that produces useful output.
+
+**Discernment** is the ability to evaluate Claude's responses critically. Can you tell when something is excellent, adequate, or subtly wrong? Can you spot a hallucination? Can you recognize when a response looks polished but lacks substance? This skill improves with experience and is essential for high-quality work.
+
+**Diligence** is the commitment to verify, fact-check, and quality-assure Claude's output before using it in consequential settings. It's the practice of treating Claude as a capable collaborator whose work still benefits from human review.
+
+Together, these four competencies — delegation, description, discernment, and diligence — form the foundation of effective AI use. You don't need to master all four before your first conversation, but keeping them in mind will accelerate your learning.
+
+## A Simple Way to Measure What Works
+
+As you use Claude for more tasks, you'll naturally start to notice which prompting approaches produce better results. You can formalize this process with a simple evaluation method.
+
+Gather five to ten real examples of the kind of work you want Claude to help with — real emails you've written, real analyses you've completed, real reports you've produced. Use these as test cases. Write prompts asking Claude to produce similar outputs, then compare Claude's results against your originals. Where does Claude match or exceed your expectations? Where does it fall short?
+
+This kind of evaluation doesn't need to be elaborate. Even a simple side-by-side comparison, repeated across a handful of examples, will reveal patterns in what works and what doesn't. Use those patterns to refine your prompts. Over time, you'll develop a set of approaches that reliably produce strong results for your specific needs.
+
+## Looking Ahead
+
+This lesson covered the fundamentals of working with Claude: how to write clear prompts, how to upload and work with files, how to iterate when the first response isn't perfect, and how to handle the inevitable moments when Claude gets something wrong. These are the building blocks for everything else in the course.
+
+The most important habit to take away from this lesson is the iteration mindset. Claude is not a vending machine where you insert a perfect prompt and receive a perfect answer. It's a thinking partner — one that gets dramatically better when you engage with it in a back-and-forth dialogue, give it specific feedback, and treat its initial responses as starting points rather than final products.
+
+The next lesson digs deeper into advanced strategies for getting better results, including structured techniques for troubleshooting when things go wrong and methods for systematically improving your prompts over time.
+
+---
+
+## Further Reading
+
+- [Getting started with Claude](https://support.claude.com/en/articles/8114491-getting-started-with-claude) — Introduction to Claude as an LLM assistant, covering access across web, desktop, and mobile platforms
+- [Understanding Claude's Personalization Features](https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features) — Overview of profile preferences, project instructions, and response styles
+- [Configure and use styles](https://support.claude.com/en/articles/10181068-configure-and-use-styles) — Customizing Claude's communication style via presets or custom styles from writing samples
+- [Usage limit best practices](https://support.claude.com/en/articles/9797557-usage-limit-best-practices) — Techniques for optimizing usage including message batching and memory features
+- [How do usage and length limits work?](https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work) — Explanation of usage limits vs. context window length limits with optimization strategies
+- [Claude is providing incorrect or misleading responses. What's going on?](https://support.claude.com/en/articles/8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on) — Explanation of hallucination behavior and how to verify responses
+- [Claude is producing links that don't work and falsely claiming that it has sent emails or produced external documents. What's going on?](https://support.claude.com/en/articles/8241188-claude-is-producing-links-that-don-t-work-and-falsely-claiming-that-it-has-sent-emails-or-produced-external-documents-what-s-going-on) — Why Claude sometimes incorrectly claims capabilities beyond its integrated tools
+- [Use Claude's chat search and memory to build on previous context](https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context) — Chat search across previous conversations and memory summarization to maintain context
+- [Uploading files to Claude](https://support.claude.com/en/articles/8241126-uploading-files-to-claude) — Supported file types, size limits, and PDF processing specifications for uploads
