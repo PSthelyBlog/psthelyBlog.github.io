@@ -1,0 +1,172 @@
+---
+title: "Creating with Artifacts: Claude's Dedicated Output Panel"
+description: "Artifacts are Claude's way of producing standalone, interactive deliverables — rendered documents, working code, live web pages, diagrams, and more — in a dedicated panel you can preview, edit, download, and share."
+pubDate: 2026-04-16
+category: "course"
+tags: ["ai", "claude", "productivity", "artifacts", "tools"]
+heroImage: ./creating-with-artifacts.png
+author: "Philippe"
+featured: false
+draft: false
+---
+
+<AIDisclosure />
+
+Most conversations with Claude produce text: a paragraph, a summary, a list of ideas, a draft of an email. That's useful, and for many tasks it's exactly what you need. But sometimes you want to create something — a working interactive tool, a formatted report, a data visualization, a piece of functional code — that deserves to live somewhere more durable than a chat message. That's what Artifacts are for.
+
+Artifacts are a distinct mode of output in Claude. Instead of appearing inline in the conversation, they appear in a dedicated panel alongside your chat, where they can be previewed, edited, downloaded, and shared. They are self-contained creations: not just text that happens to contain code, but actual rendered outputs you can interact with, modify, and hand off.
+
+This lesson covers what Artifacts are, when Claude creates them, what kinds of things they can produce, and how to share your creations with others.
+
+## What Is an Artifact, Exactly?
+
+Think of an artifact as anything Claude creates that is meant to stand on its own — something you would use or share outside the conversation itself.
+
+When Claude generates a piece of content that is substantial, self-contained, and likely to be reused or iterated on, it opens a separate preview panel to the right of the chat window and renders that content there. You can see it, interact with it, edit it, and download it, all without interrupting the flow of the conversation on the left.
+
+<Callout type="info" title="How Claude decides to create an artifact">
+Claude generally creates an artifact when the output is at least 15 lines long, is self-contained (meaning it makes sense on its own, without needing the surrounding conversation), and is the kind of thing you're likely to want to use or come back to. If Claude produces a short response in the chat when you expected an artifact, you can simply say "create that as an artifact" and it will.
+</Callout>
+
+Artifacts are available on all Claude plans — Free, Pro, Max, Team, and Enterprise — and can be enabled or disabled in **Settings > Capabilities**.
+
+## The Types of Artifacts Claude Can Create
+
+Claude can generate several distinct types of artifacts, each suited to different kinds of work.
+
+### Documents
+
+When you ask Claude to produce a report, a set of meeting notes, a blog post, or a structured reference document, it can render that content as a standalone text document in the artifact panel. Documents are formatted in Markdown — a lightweight formatting system that uses plain characters like `#` for headings and `**` for bold text — or plain text, depending on the content.
+
+This is the right format for deliverables you'll copy into another tool: a slide deck notes section, a shared document, a company wiki page.
+
+### Code Snippets
+
+Claude can write functional code in virtually any major programming language — Python, JavaScript, C++, SQL, and many others. When it does so in artifact form, the code appears in a dedicated panel with syntax highlighting (visual formatting that color-codes different parts of the code to make it easier to read) and can be copied cleanly for use in your own projects.
+
+You don't need to be a developer to benefit from code artifacts. If you describe what you want in plain language — "a script that calculates compound interest given a starting balance, annual rate, and number of years" — Claude can write it, and you or a developer on your team can use it directly.
+
+### HTML Pages
+
+Claude can generate complete web pages as artifacts — pages that render immediately in the preview panel so you can see exactly what they look like in a browser. This is particularly useful for creating landing page mockups, interactive demos, or simple prototypes without needing a design team or a web developer.
+
+An HTML artifact is a fully self-contained web page. The HTML defines the structure, CSS (styling rules) and JavaScript (interactive behavior) can be included in the same file. You can see the result in real time and request changes conversationally: "make the buttons larger," "change the header color to dark blue," "add a section for testimonials."
+
+### SVG Images
+
+SVG stands for Scalable Vector Graphic — a file format for images that are defined by mathematical instructions rather than pixel-by-pixel color data. The practical benefit is that SVG images look sharp at any size: they can be scaled up to fill a billboard or shrunk to fit a small icon without losing quality.
+
+Claude can generate SVG artifacts for logos, icons, illustrations, simple diagrams, and visual symbols. You can describe what you want in plain language and refine it through follow-up requests.
+
+### Mermaid Diagrams
+
+Mermaid is a text-based notation system for creating diagrams. You describe a flowchart, an org chart, a Gantt chart, or a sequence diagram in structured text, and the system renders it as a clean visual. Claude can create and edit Mermaid diagrams as artifacts, which is useful for documenting processes, mapping project timelines, or illustrating system relationships.
+
+Because the underlying representation is text, you can ask Claude to modify a diagram just by describing the change: "add a step between 'Review' and 'Approve'" or "move the 'Design' phase to happen in parallel with 'Development'."
+
+### React Components
+
+React is a widely used framework for building interactive user interfaces on the web. A React component is a self-contained, reusable piece of a user interface — a button group, a data table, a form, a small application — that Claude can generate and render as a live, interactive artifact.
+
+You don't need to know anything about React to request one. Asking Claude for "an interactive checklist where items can be checked off and the progress percentage updates automatically" will produce a working React component you can preview immediately and customize through conversation.
+
+<Callout type="tip" title="Be specific about the end user and structure">
+The more context you give Claude about who will use the artifact and what it needs to do, the better the result. "Create a status dashboard for a project manager who needs to track five milestones" will produce a more useful artifact than "create a project tracker."
+</Callout>
+
+## Creating and Refining Artifacts
+
+You don't need to use any special command to trigger an artifact. Simply make a request that calls for substantial, standalone output — "write a report on our Q3 findings," "build me an interactive quiz," "create a flowchart of our onboarding process" — and Claude will determine whether an artifact is the right format.
+
+The real power of artifacts comes from iteration. Each artifact you create is a starting point, not a final deliverable. You can:
+
+**Refine through conversation.** After the artifact appears, continue talking to Claude in the chat panel on the left. Ask it to make changes, add sections, shift the tone, fix something that isn't working. Claude maintains context about what it built and why, so follow-up requests work naturally without you needing to re-explain the whole project.
+
+**Edit directly.** The artifact panel includes an edit mode where you can make changes to the text or code yourself, without going through Claude.
+
+**Fork to explore alternatives.** If you want to try a different approach without losing your current version, you can go back to an earlier message, click "Edit" to start a new conversation branch from that point, and explore a different direction. Your original artifact is preserved.
+
+**Fix errors conversationally.** If something in an artifact isn't working — a broken interaction, a formatting problem, a calculation error — you can describe the problem in plain language and Claude will attempt to fix it. There's also a "Fix with Claude" button that appears when an error is detected.
+
+## Generating Real Files: Excel, Word, PowerPoint, and PDF
+
+Beyond the artifact panel, Claude can also execute code to produce downloadable files you can open directly in standard software. This is a distinct but related capability worth understanding.
+
+Claude can generate Excel spreadsheets, PowerPoint presentations, Word documents, and PDF files that you can download and use immediately. This works by having Claude write and run code behind the scenes to assemble the file — you don't need to know or care about that process. You just describe what you want in natural language, and Claude produces a file you can open in Microsoft Office, Google Workspace, or any compatible application.
+
+You can create financial models in Excel with working formulas, perform advanced analyses on uploaded data, produce reports with charts and visualizations, and generate presentations from your documents — all without specialized software skills.
+
+Some practical examples of what this looks like in practice:
+
+- Upload a CSV file of sales data and ask Claude to produce an Excel workbook with a summary tab, a pivot table, and a chart — and get back a file you can open directly in Excel with all those elements intact and editable.
+- Ask Claude to turn a set of bullet-point notes into a PowerPoint presentation, and receive a `.pptx` file you can open, edit, and present from.
+- Ask Claude to analyze a dataset and write a memo explaining its findings, then produce both a Word document and a PDF version of that memo in a single request.
+
+<Callout type="info" title="File creation is available on all plans">
+File creation and download is available to all Claude users — Free, Pro, Max, Team, and Enterprise — on the web, Claude Desktop, and Claude Mobile. The maximum file size for both uploads and downloads is 30MB.
+</Callout>
+
+This capability is enabled through **Settings > Capabilities > Code execution and file creation**.
+
+## Sharing What You've Built
+
+Once you've created an artifact, you have several options for getting it in front of others.
+
+**Copy or download.** The simplest option: copy the content to your clipboard, or download the artifact as a file, and use it wherever you like. This works for any artifact type on any plan.
+
+**Publish publicly** (Free, Pro, and Max plans). You can publish an artifact so that anyone with the link can view, interact with, and customize it. The link is specific to the version you published. Viewers with a Claude account can interact with all features of the artifact within their own usage limits. You can also generate an embed code to place the artifact directly on a website. If you later decide to retract it, you can unpublish it — though it's worth knowing that once unpublished, that specific artifact cannot be republished.
+
+**Share within your organization** (Team and Enterprise plans). On team plans, artifacts are not published publicly. Instead, you share them within your organization: only members who are logged into your Team or Enterprise account can access them. If an artifact was created inside a Project, viewers must also have access to that Project. This keeps sensitive or internal work contained appropriately.
+
+<Callout type="warning" title="Be thoughtful about what you share">
+When you share an artifact, viewers also gain access to any files and attachments from the conversation that produced it. If that conversation involved sensitive documents, consider this before sharing.
+</Callout>
+
+**Discover and customize others' artifacts.** Claude has an Artifacts section in the sidebar where you can browse a curated collection of artifacts created by others. You can try any artifact immediately, and if you find one you want to build on, a "Customize" button opens it as a new conversation where you can modify it to suit your needs. Your customization creates your own copy — the original is unaffected.
+
+## AI-Powered Artifacts
+
+One of the more advanced possibilities with artifacts is building them so they incorporate Claude's intelligence as part of how they function — not just tools that display static content, but interactive applications where end users can interact with Claude themselves.
+
+You can build artifacts that embed AI capabilities, turning them into AI-powered apps. Users of your artifacts can access Claude's intelligence through a text-based API — answering questions, generating creative content, providing personalized coaching, playing games, solving problems, and adapting responses based on input.
+
+The practical implication: you could build a custom assistant pre-loaded with context about your team's product, a coaching tool that gives personalized feedback on user submissions, or an interactive learning experience — and share it with colleagues or a broader audience. When you share AI-powered artifacts, others can use them immediately — no API keys required, and no costs to you. Usage counts against each user's own Claude subscription limits, not yours.
+
+This is a genuinely novel capability: it means a non-technical professional can create and distribute an AI-powered application without writing a single line of code, without managing any infrastructure, and without incurring costs on behalf of their users.
+
+<Callout type="info" title="MCP integration for artifacts">
+On Pro, Max, Team, and Enterprise plans, artifacts can also connect to external services through MCP (Model Context Protocol) — the standard integration layer that connects Claude to tools like Asana, Google Calendar, and Slack. This enables artifacts that don't just display information, but can read from and write to the tools your team already uses. Each user must authenticate MCP connections independently, even when using a shared artifact.
+</Callout>
+
+## Getting the Most from Artifacts
+
+A few practical principles that apply across artifact types:
+
+**Be specific about the end user and the purpose.** "Create a dashboard" is a starting point. "Create a project status dashboard for a non-technical client who needs to see which milestones are complete, which are in progress, and which are at risk — with a clean, professional visual design" will produce something much closer to what you actually need.
+
+**Iterate one change at a time.** Particularly for complex artifacts like interactive HTML pages or React components, making one targeted change per request — rather than asking for a large batch of changes at once — produces cleaner results and makes it easier to track what changed and why.
+
+**If Claude responds in chat instead of creating an artifact, just ask.** Claude uses judgment about when an artifact is warranted, and occasionally it gets it wrong. Simply saying "put that in an artifact" or "create that as an artifact" will trigger the right behavior.
+
+**Name your artifacts clearly if you're saving or sharing them.** When you download or share an artifact, the name you give it will determine how easy it is to find and use later. Treat it like naming a file: descriptive and specific is better than generic.
+
+## What Artifacts Enable for Professional Work
+
+Stepping back from the mechanics: what does having an artifact capability actually change about how you work with Claude?
+
+The answer is that it shifts Claude from a source of text output to a source of usable deliverables. Instead of asking Claude for ideas about a presentation structure and then building the presentation yourself, you can ask Claude to build the presentation. Instead of asking for help thinking through a data analysis and then doing the analysis yourself, you can ask Claude to produce the analysis — with charts, formulas, and formatted output — and download the result.
+
+The iteration model also changes the nature of the work. Because you can refine an artifact through conversation — adjusting, extending, and redirecting it — the output improves through use rather than being a one-shot generation. This is where the "thinking partner" framing from earlier in the course becomes most concrete: you and Claude are collaborating on a shared object, not just exchanging messages.
+
+The next lesson extends this further by covering Skills — reusable instruction sets that give Claude domain-specific knowledge about how to execute particular workflows, turning one-time tasks into repeatable, consistent processes.
+
+---
+
+## Further Reading
+
+- [What are artifacts and how do I use them?](https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them) — Artifacts feature for creating shareable apps, tools, and content in a dedicated window with MCP integration
+- [Publishing and sharing artifacts](https://support.claude.com/en/articles/9547008-publishing-and-sharing-artifacts) — Making artifacts publicly available, sharing within organizations, and discovering artifacts created by others
+- [Create and edit files with Claude](https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude) — Code execution capabilities for generating Excel, PowerPoint, Word, and PDF files within conversations
+- [Visual and interactive content](https://support.claude.com/en/articles/13641943-visual-and-interactive-content) — Visual response features including weather, recipes, sports scores, custom visuals, and third-party data policies
+- [Custom visuals in chat](https://support.claude.com/en/articles/13979539-custom-visuals-in-chat) — How Claude generates interactive HTML diagrams and charts within conversations, with options for saving
+- [Uploading files to Claude](https://support.claude.com/en/articles/8241126-uploading-files-to-claude) — Supported file types, size limits, and PDF processing specifications for uploads
