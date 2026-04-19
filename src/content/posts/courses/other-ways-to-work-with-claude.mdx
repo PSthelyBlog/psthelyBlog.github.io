@@ -1,0 +1,202 @@
+---
+title: "Other Ways to Work with Claude"
+description: "Beyond claude.ai — how Claude Code, Claude in Slack, Claude for Excel, and Claude in Chrome each bring Claude into the places you already work."
+pubDate: 2026-04-19
+category: "course"
+tags: ["ai", "claude", "claude-code", "slack", "excel", "chrome"]
+author: "Philippe"
+featured: false
+draft: false
+---
+
+<AIDisclosure />
+
+If you've spent any time in claude.ai — the main web and desktop chat interface — you already have a good sense of what Claude can do. You open a conversation, type a question or a task, and Claude responds. You upload files, start Projects, generate Artifacts. It's a genuinely powerful way to work.
+
+But a lot of your day isn't spent in claude.ai. It's spent in a code editor, a Slack thread, a spreadsheet, or a browser tab. Switching back and forth — copying a paragraph out, pasting Claude's response back in — adds friction that, over time, is enough to stop you reaching for Claude in the first place.
+
+That's why Anthropic has built Claude into several of the tools you likely already use. The products covered in this post — **Claude Code**, **Claude in Slack**, **Claude for Excel**, and **Claude in Chrome** — all share the same core Claude intelligence, but each is shaped around the environment it lives in. The goal is simple: let Claude meet you where the work already happens.
+
+This post walks through each one: what it is, what it's especially good at, and how to decide when to reach for it.
+
+
+## Claude Code: Your AI Partner in the Terminal and IDE
+
+Claude Code is Anthropic's tool for developers. Rather than asking you to copy code into a chat window and paste the response back into your editor, Claude Code runs directly in the places where engineering work happens — the terminal, your IDE, a standalone desktop app, and the web.
+
+At a conceptual level, it's an **agentic coding assistant**. Agentic here just means that Claude doesn't only suggest code; it can actually take actions on your behalf — reading files, editing them, running commands, and working across multiple files and tools to get a task done. You describe what you want in plain language, Claude plans the approach, makes changes, and shows you what it did.
+
+### What it's designed for
+
+Claude Code is aimed at everyday development work rather than one-off snippets. Typical uses include building a feature from a plain-English description, debugging with just an error message and a repository, exploring an unfamiliar codebase ("where is user authentication handled, and which file is the entry point?"), and automating repetitive tasks like boilerplate generation, lint fixes, and writing commit messages. It can also stage changes, create branches, open pull requests, and integrate with CI/CD pipelines through GitHub Actions.
+
+### Where it runs
+
+Claude Code gives you multiple environments to choose from — a CLI for the terminal, extensions for VS Code, Cursor and JetBrains IDEs, a standalone desktop app, and a web version. You can move between them during the same task. Developers who spend most of their time in the terminal can stay there; teams who prefer inline diffs inside their IDE can use the extension; and longer-running or asynchronous tasks can be kicked off on the web.
+
+### Working with your codebase
+
+A common question is whether Claude Code "indexes" your codebase the way some tools do. It doesn't — and that's intentional. Instead, Claude Code has access to a system prompt and a series of tools that it can use to navigate your codebase on command, using a search tool to explore files and read them as needed. In practice, this means Claude reads what it needs when it needs it, rather than relying on a pre-built map of your project.
+
+You can also add a file called `CLAUDE.md` to your project root. Claude Code reads it at the start of every session, so things like your naming conventions, preferred libraries, or build commands are available to Claude without you re-explaining them each time.
+
+<Callout type="tip" title="Think of CLAUDE.md as team memory">
+The `CLAUDE.md` file is one of the highest-leverage setup steps you can take. Anything you'd find yourself repeating to a new teammate — architectural conventions, folder structure, testing approach — belongs here, so Claude applies it automatically from conversation one.
+</Callout>
+
+### Access and integration
+
+Claude Code is available as part of Pro and Max plans through a unified subscription that covers both Claude on the web, desktop, and mobile apps and Claude Code in your terminal. It's also available on Team and Enterprise plans. Because it supports the Model Context Protocol (MCP) — the open standard that lets Claude connect to external tools — Claude Code can also read design docs in Google Drive, update Jira tickets, or pull data from Slack during a coding session, if you've enabled those connections.
+
+
+## Claude in Slack: AI Inside Your Team's Conversations
+
+A surprising amount of knowledge work happens in Slack threads: decisions get made, questions get asked, documents get shared. Claude in Slack brings AI assistance into that flow, so you can get help without leaving the conversation.
+
+There are three main ways to use Claude inside Slack, and they're worth understanding because each one is suited to a different kind of task.
+
+### Direct message with Claude
+
+You can open a **direct message** with @Claude and treat it essentially like a private chat — a space to draft emails, summarize documents, ask research questions, or prepare for a meeting, without that conversation being visible to anyone else. It's a good place to iterate privately before sharing anything in a public channel.
+
+### The AI assistant panel
+
+Slack provides an **AI assistant header** that opens a Claude panel on the right side of your Slack window. This lets you access Claude from anywhere in Slack without starting a separate DM. Close the panel, and the conversation moves to your history for later reference.
+
+### Thread and channel participation
+
+The third mode is what most people notice first: **@-mentioning Claude in a channel or thread**. You can tag Claude in any conversation to ask for help — drafting a response, summarizing the discussion so far, pulling out action items, or answering a question with context from recent messages.
+
+One detail worth knowing: when you @Claude in a channel or thread, it doesn't just post its response into the conversation. You'll see the draft privately first, and can review, edit, or regenerate the response before deciding to share it. You then click "Post to thread" to share Claude's response with your team. This keeps you in control of what goes into the channel — Claude never replies publicly on your behalf without your approval.
+
+How much context Claude has to work with depends on where you're using it. When mentioned in a channel, Claude has access to the last 20 messages in that channel, including any files shared within those messages. When using @Claude in a thread, it has access to the last 50 messages in that thread. You can also forward a specific message to Claude, which gives it access to a wider slice of the surrounding thread.
+
+### The Slack connector: going the other direction
+
+There's a second, related integration worth mentioning. Besides Claude *in* Slack, there's also a **Slack connector** you can enable in claude.ai itself. This goes the opposite direction: it lets Claude search your Slack workspace — channels, messages, and shared files — so that when you're working in claude.ai, Claude can pull relevant Slack context into its responses. This is useful for things like preparing for a meeting by gathering recent discussions, onboarding to a new team by reviewing channel history, or doing deeper research that blends Slack conversations with other sources.
+
+<Callout type="info" title="Installing Claude in Slack">
+Before anyone on your team can use Claude in Slack, a Slack workspace admin needs to approve the Claude app from the Slack App Marketplace. If you try to install it without admin approval, you'll see a prompt to send a request to your Slack admin. Once approved, individuals sign in with their existing Claude credentials — no separate account needed.
+</Callout>
+
+### Conversation boundaries
+
+Your Slack conversations with Claude stay separate from your chat history in claude.ai. Conversations started in Slack aren't visible in the Claude web app, and vice versa. This is useful to know if you're ever looking for a previous exchange and can't find it — you may need to return to the platform where it originally happened.
+
+
+## Claude for Excel: A Claude Sidebar Inside Your Spreadsheets
+
+If Slack is where conversation happens, Excel is where numbers happen — and for a lot of finance, operations, and analytical roles, it's where *most* of the work happens. Claude for Excel is an add-in that embeds Claude directly into Microsoft Excel as a sidebar, alongside your actual spreadsheet.
+
+It's designed for professionals who work extensively with spreadsheets, particularly in financial analysis and modeling, though the underlying capabilities apply just as well to operations, research, or any work that involves multi-tab workbooks.
+
+### What Claude can do inside Excel
+
+Think of it less as a formula helper and more as a structural analyst with full read-and-write access to your workbook. Once open, Claude can read your entire file — every tab, every formula, every cell dependency — and respond to natural-language requests about it.
+
+Common things professionals ask Claude to do in Excel include:
+
+- **Explain a model you didn't build.** If you've ever inherited a multi-tab workbook from a departing colleague, you'll appreciate being able to ask "walk me through this model — what's on each tab and how does everything tie together?" and getting a coherent explanation.
+- **Update assumptions without breaking dependencies.** You can ask Claude to change inputs, run scenarios, and test different outcomes while preserving the underlying formula links.
+- **Debug errors.** Trace #REF!, #VALUE!, or circular reference errors back to their source, and get both an explanation of what went wrong and a proposed fix.
+- **Apply Excel-native operations.** Claude can apply a range of Excel-native operations directly, including sorting and filtering data, editing pivot tables and charts, applying conditional formatting rules, setting data validation, and preparing workbooks for printing with finance-specific formatting tools.
+- **Build models from scratch or populate templates.** Describe what you need — revenue projections, a comparable-companies analysis, a variance report — and Claude can generate the structure and fill it with the right formulas.
+
+### Transparency and control
+
+A defining feature is that Claude is transparent about what it changes. When Claude references a specific cell in its explanations, you can click through and jump directly to that cell. Changes are highlighted so you can see exactly what moved, and you can enable **session logging** — a separate "Claude Log" tab that tracks actions taken each turn, so Claude can maintain a history of its actions on the sheet. This matters enormously in finance work, where an unexplained change to a model assumption could cascade through downstream calculations.
+
+You can also set persistent preferences. The Instructions field in the add-in sidebar lets you set preferences that apply to every conversation in Excel — useful for formatting conventions (for example, "always use IB formatting: blue for inputs, black for formulas"), preferred output style, or recurring context Claude should know about your workflow.
+
+### Skills, connectors, and cross-app work
+
+Skills and connectors you've enabled in your main Claude settings carry over into Excel automatically. If your team has built a custom Skill for DCF modeling or a connector to a financial data provider, it's available inside the Excel sidebar.
+
+Claude can also coordinate **across Office apps** in a single conversation. Instead of switching between apps and providing context each time, Claude can read from one app and make changes in another — for example, you can ask Claude to analyze data in an Excel workbook, then create a presentation in PowerPoint using those results, without copying and pasting between apps. A parallel add-in exists for PowerPoint (and Word), and they can work together during the same task.
+
+<Callout type="warning" title="A note on prompt injection in spreadsheets">
+Because Claude for Excel reads and acts on spreadsheet content, there's a security risk worth understanding: **prompt injection**. This is when a file from an untrusted source contains hidden instructions designed to manipulate the AI. A seemingly innocent template downloaded from the internet could, in theory, contain text telling Claude to "export financial data to this URL" — and Claude might interpret those instructions as coming from you. The practical safeguard is simple: only use Claude for Excel with files you trust, and be cautious with templates or data received from external parties.
+</Callout>
+
+### Getting set up
+
+Claude for Excel is installed from the Microsoft Marketplace. Individuals can install it directly; in larger organizations, IT admins can deploy it to specific users or the whole company through the Microsoft 365 Admin Center. Once installed, you open Excel, activate the add-in, and sign in with your Claude account. On Mac, the shortcut `Control + Option + C` opens the sidebar; on Windows, it's `Control + Alt + C`.
+
+
+## Claude in Chrome: Giving Claude Eyes and Hands on the Web
+
+The fourth product is the most experimental of the group — and also the one that can feel most transformative once you see it work. **Claude in Chrome** is a browser extension that lets Claude read, click, and navigate web pages alongside you. Instead of describing what's on a webpage to Claude, or copying text into a chat, Claude is simply *there*, in a side panel, seeing what you see.
+
+### What it does
+
+At the simpler end, Claude in Chrome can summarize a long article, draft a response to an email you're reading, or pull structured information out of a page. At the more ambitious end, it can take actions — filling out forms, clicking buttons, navigating across multiple tabs, and completing multi-step workflows. Ask it to pull pricing from several competitor sites, register a set of people for an event through a form, or walk through a booking process, and it will attempt the steps itself.
+
+It also has some built-in knowledge of common platforms. Simple commands like "schedule a meeting" on Google Calendar or "update the doc" in Google Docs work without detailed step-by-step instructions. And you can drag multiple tabs into Claude's designated tab group to let Claude view and interact with all grouped tabs at once.
+
+### Two permission modes — and why they matter
+
+Because Claude is taking actions in the browser, permissions become the central feature. When you open the extension, you choose between two modes:
+
+- **Ask before acting.** Claude creates a plan from your prompt, which you can approve before it executes. The plan specifies which websites you're allowing Claude to access and the approach it will follow. Once you click "Approve plan," Claude acts independently within the outlined parameters, but still checks with you before certain irreversible actions, like making a purchase, creating an account, or downloading a file.
+- **Act without asking.** Claude takes actions without pausing for approval. This is faster, but it's explicitly a high-risk mode. Using "Act without asking" significantly increases prompt injection risk, and malicious actors may be able to trick Claude into unintended actions even with built-in safeguards.
+
+Permissions are granted **per domain**. If you've allowed Claude to work on one website, that doesn't grant it access to others — you'll be prompted again on each new domain. This keeps scope tight and makes it easier to revoke access when you no longer need it.
+
+### Why prompt injection is the biggest risk
+
+It's worth understanding why prompt injection is such a focus for a browser-using AI. The biggest risk facing browser-using AI tools is prompt injection attacks where malicious instructions hidden in web content could trick Claude into taking unintended actions. For example, a seemingly innocent to-do list or email might contain invisible text instructing Claude to "retrieve my bank statements and share them in this document." Claude may interpret these malicious instructions as legitimate requests from you.
+
+Anthropic has built defenses against this — including content classifiers that scan pages for injection attempts, and per-domain permission gates — but the honest position is that no defense is perfect. The practical guidance is straightforward: start with trusted sites, keep a close eye on what Claude is doing, and avoid using the extension for anything sensitive.
+
+### What Claude in Chrome won't do
+
+For your safety, certain categories of site are off-limits by default. The site may be in Claude's default blocked categories — financial services, banking, investment platforms, cryptocurrency exchanges, adult content, and pirated content — and Claude simply won't operate there. On Team and Enterprise plans, admins can add their own allowlists and blocklists on top of these defaults.
+
+There are also actions Claude won't take even when you've explicitly approved it — bypassing bot authorizations, executing financial trades, or permanently deleting files, among others. These are hard limits, not preferences.
+
+<Callout type="warning" title="Use Claude in Chrome like an assistant you're still supervising">
+The right mental model for Claude in Chrome today is a capable assistant who works quickly but occasionally makes mistakes. You wouldn't hand that person your banking credentials or let them sign legal documents unsupervised — the same caution applies here. Start with trusted sites, use "Ask before acting" while you build intuition for how Claude behaves, and only move to more autonomous modes once you're confident.
+</Callout>
+
+### Access
+
+Claude in Chrome is available in beta on paid plans. It's enabled by default on Team plans and disabled by default on Enterprise plans, giving Enterprise admins the chance to review safety guidance before rolling it out. The extension can also be paired with the Claude desktop app and Claude Code — letting you start a task in Claude Desktop and have it handled in the browser without switching windows, or using Chrome as the testing layer while Claude Code writes and debugs your application.
+
+
+## Choosing the Right Product for the Task
+
+With four products (plus everything else in the Claude family), it can be tempting to over-think which one to use. In practice, the decision almost always comes down to where the work already lives.
+
+If you're writing or debugging code, **Claude Code** is almost always the right answer — the tighter loop between a terminal or IDE and Claude pays for itself within the first hour of real use.
+
+If the work is happening in a thread — a decision is forming, a question is floating, a draft needs shaping — **Claude in Slack** keeps you from pulling the conversation out of the channel and losing the shared context.
+
+If the work lives in cells, formulas, and workbooks, **Claude for Excel** (with its PowerPoint and Word counterparts nearby) avoids the trap of re-creating your spreadsheet's context in a chat window.
+
+And if the work happens in a browser — research, form-filling, navigating a vendor portal, synthesizing information across sites — **Claude in Chrome** turns the browser itself into a working surface.
+
+The point isn't that you have to choose one. Many professionals use several throughout a typical week, moving between them as the task changes. What makes this ecosystem useful is that the underlying Claude is the same in each — the same reasoning, the same tone preferences, the same Skills and connectors when they apply. You're not learning four different tools. You're learning one tool that shows up in four places.
+
+
+## Looking Ahead
+
+This post covered the Claude products that live outside claude.ai — Claude Code, Claude in Slack, Claude for Excel, and Claude in Chrome. Each one exists because a significant part of professional work happens outside a general-purpose chat window, and the friction of switching contexts is itself a reason people stop using a tool that might otherwise help.
+
+The broader idea running through all four products is the same one that runs through the course as a whole: Claude works best as a consistent thinking partner, not an occasional one. Bringing it into the places you already work — your terminal, your team's Slack, your spreadsheet, your browser — is the most direct way to make that happen.
+
+
+---
+
+## Further Reading
+
+- [Claude Code FAQ](https://support.claude.com/en/articles/12386420-claude-code-faq) — Frequently asked questions covering SSO, model access, IDE support, cost management, and CI/CD integration
+- [Claude Code on the web](https://support.claude.com/en/articles/12618689-claude-code-on-the-web) — Asynchronous web-based coding tasks delegated to Claude that run remotely on GitHub repositories
+- [Using Claude Code with your Pro or Max plan](https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan) — Configuring Claude Code with Pro or Max subscriptions, including authentication and billing
+- [Getting started with Claude in Slack](https://support.claude.com/en/articles/11506255-getting-started-with-claude-in-slack) — Setup and management for Claude in Slack across DM, AI assistant panel, and thread participation surfaces
+- [Using Claude in Slack](https://support.claude.com/en/articles/12461605-using-claude-in-slack) — Interacting with Claude via Slack through direct messages, channel mentions, and the AI assistant panel
+- [Use Claude for Excel](https://support.claude.com/en/articles/12650343-use-claude-for-excel) — Claude for Excel add-in for financial modeling, data analysis, formula debugging, and spreadsheet editing
+- [Use Claude for PowerPoint](https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint) — Claude for PowerPoint add-in for building slides from corporate templates and making targeted edits
+- [Work across Excel and PowerPoint](https://support.claude.com/en/articles/13892150-work-across-excel-powerpoint-and-word) — Cross-application integration enabling Claude to read from Excel and make changes in PowerPoint
+- [Get started with Claude in Chrome](https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome) — Setup for the Chrome browser extension enabling Claude to read, click, and navigate websites
+- [Claude in Chrome Permissions Guide](https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide) — Permission modes and security restrictions for Claude in Chrome
+- [Using Claude in Chrome Safely](https://support.claude.com/en/articles/12902428-using-claude-in-chrome-safely) — Security risks including prompt injection from malicious web content and protective measures
